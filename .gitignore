@@ -1,0 +1,28 @@
+# Local app state (Freebuff's own workspace database)
+.freebuff/
+
+# Archives — duplicates of the repo content
+*.zip
+
+# Node
+node_modules/
+
+# Env / secrets
+.env
+.env.local
+.env.*.local
+
+# Expo / React Native
+.expo/
+.expo-shared/
+web-build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

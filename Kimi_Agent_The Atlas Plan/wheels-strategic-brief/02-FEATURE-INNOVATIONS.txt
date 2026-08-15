@@ -1,0 +1,116 @@
+================================================================================
+WHEELS STRATEGIC BRIEF — 02: FEATURE INNOVATIONS
+The unfair advantages that make WHEELS uncopyable.
+================================================================================
+
+P0 — BUILD THESE FIRST (High impact, do or die)
+------------------------------------------------
+
+1. PAY TRANSPARENCY LAYER
+   Not just ranges — show ACTUAL pay. Mechanics upload pay stubs (anonymized 
+   via OCR). You aggregate into percentiles by trade, certification, and zip 
+   code. Display as: "25th: $22/hr | 50th: $28/hr | 75th: $35/hr | 90th: $42/hr"
+   
+   This is your nuclear option. Shops will hate it. Mechanics will worship it.
+   It is the single reason they will open your app every day.
+   
+   Tech: Tesseract.js or AWS Textract for OCR. Stripe-style anonymization 
+   pipeline. Aggregate only, never show individual data.
+   
+   Legal: Wage disclosure laws vary by state. Consult counsel. Consider 
+   Plaid integration for bank-verified income (more trust, less fraud).
+
+2. SOS NETWORK (Emergency Tool Lending)
+   Broke your 1/2" torque wrench on a Friday afternoon? Open the app, 
+   see who within 5 miles has one. Reputation-based lending (like Airbnb 
+   for tools). Gamified: borrowers earn "Good Neighbor" badges. Lenders 
+   earn priority access to job postings.
+   
+   Why this wins: No competitor has community stickiness. Job boards are 
+   transactional. This makes WHEELS a daily utility, not a monthly visit.
+
+3. SHOP DNA PROFILES
+   Every shop gets a generated "DNA" profile based on 50+ data points:
+     - Average employee tenure
+     - Turnover rate (derived from review patterns)
+     - Tool budget per bay
+     - Certification requirements
+     - Union status
+     - Flat-rate vs. hourly mix
+     - Overtime frequency
+     - Safety incident rate
+     - Training investment per employee
+   
+   Updated in real-time. Visualized as a "Shop Health" score (0-100).
+   Shops can see their own DNA. Mechanics use it to filter and compare.
+
+P1 — BUILD THESE NEXT (Major differentiators)
+----------------------------------------------
+
+4. CULTURE SCORE ALGORITHM
+   Kill the 1-5 star laziness. Build a multi-vector culture index:
+     - Work-life balance
+     - Tool allowance / reimbursement
+     - Training investment
+     - Safety record
+     - Management quality
+     - Growth opportunity
+     - Overtime policy fairness
+   
+   Each dimension scored 1-10. Weighted by:
+     - Reviewer tenure (longer = more weight)
+     - Recency (last 6 months = full weight, 6-12mo = 50%, >12mo = 25%)
+     - Verified status (verified = 2x weight)
+   
+   Visualized as an interactive radar chart on shop profiles.
+
+5. THE BENCH (Passive Job Market)
+   Mechanics set their "bench price" — the minimum pay + benefits to consider 
+   leaving their current shop. They go into passive mode. Shops browse the 
+   bench (anonymized profiles: "Diesel Tech, 8 years, ASE Master, $38/hr min, 
+   within 25 miles of 80202"). Shops make offers. Mechanics review and accept 
+   or decline.
+   
+   Like Tinder for trades, but with dignity. No applying. No resumes. Just 
+   verified credentials and a number.
+   
+   Monetization: Shops pay per "bench view" or monthly subscription for 
+   unlimited access. Mechanics pay $9.99/mo for premium bench placement 
+   (highlighted, top of list).
+
+6. VOICE-FIRST REVIEWS
+   Mechanics work with their hands, not their thumbs. Let them dictate 
+   reviews while on break. AI (Whisper API) transcribes. GPT-4 structures 
+   into pros/cons. Detects sentiment. Flags concerns.
+   
+   Expected outcome: 3x review submission rate. Longer, richer reviews.
+   Background noise filtering essential for shop environments.
+
+P2 — BUILD THESE LATER (Nice to have, high polish)
+-------------------------------------------------
+
+7. AI SHOP INSPECTOR
+   Multimodal AI (GPT-4V / Claude 3) analyzes shop photos uploaded by users.
+   Detects safety violations (missing guards, cluttered bays), tool 
+   organization quality, cleanliness. Auto-generates "Shop Health" reports.
+   
+   Gamification: Shops can request voluntary inspection. Passing earns a 
+   "Certified Clean" badge. Failing gets private recommendations.
+
+8. PREDICTIVE TURNOVER ALERTS
+   ML model trained on:
+     - Review sentiment shifts over time
+     - Pay stagnation signals (no raises mentioned in 12+ months)
+     - Seasonal patterns (turnover spikes in Q1)
+     - Shop DNA degradation (scores dropping)
+   
+   Alert shops: "3 of your top techs are showing exit signals. Consider 
+   retention conversation." Charge premium for this. $49/mo per alert tier.
+
+9. AR TOOL VISUALIZATION
+   Shop posts job requiring specific tools. Mechanic scans their toolbox with 
+   AR (ARKit/ARCore). App recognizes tools via fine-tuned vision model. 
+   Compares against job requirements. Highlights matches and gaps. Calculates 
+   investment needed. Instant qualification check.
+   
+   Affiliate revenue: Links to purchase missing tools (Snap-on, Amazon, etc.).

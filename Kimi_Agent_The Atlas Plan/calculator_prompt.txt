@@ -1,0 +1,36 @@
+Build a standalone, single-file web page (HTML + vanilla JS or React, your choice — no backend, no login, works over file:// or any static host) called "Run The Numbers — The Mechanic's True Pay Calculator."
+
+PURPOSE: Mechanics compare job offers with wildly different pay structures and get screwed by hidden costs. This tool compares two jobs side by side and shows the REAL take-home difference. The math must be exact and internally consistent — double-check every formula.
+
+DESIGN: Mobile-first (usable one-handed on a phone), dark theme, industrial orange accent (#ff6b00), bold condensed typography. No pastel startup look.
+
+INPUTS — for each job (Job A / Job B, side by side):
+1. Pay structure toggle: Flat Rate / Hourly / Salary
+2. Rate: $/hr (or $/yr for salary)
+3. FLAT RATE ONLY: average flagged (billed) hours per week, plus a "slow weeks" input = number of weeks per year where flagged hours drop to a low value, and what that low value is (e.g., 20 weeks/yr at 25 flagged hrs)
+4. Actual physical hours at the shop per week (flat-rate techs often work 50 to flag 40)
+5. Health insurance: $/month out of pocket (0 if employer covers fully)
+6. 401k match: % of gross employer matches (assume employee contributes enough to capture full match)
+7. Paid days off per year
+8. Tool allowance: $/yr employer pays (default 0)
+9. Annual tool costs: tool-truck payments + new tool purchases $/yr
+10. Commute: round-trip miles per day; cost = miles x $0.70/mi (IRS rate) x working days per year
+
+MATH (per job):
+- Working weeks/yr = 52 minus (paid days off / 5), rounded sensibly
+- HOURLY: gross = rate x physical hrs/wk x working weeks. Hours over 40/wk paid at 1.5x IF an overtime toggle is on (add this toggle).
+- FLAT RATE: gross = rate x [ (normal flagged hrs x normal weeks) + (slow flagged hrs x slow weeks) ]. No overtime.
+- SALARY: gross = salary.
+- True income = gross - (12 x insurance $/mo) - tool costs + tool allowance - commute cost + (401k match % x gross)
+- EFFECTIVE HOURLY WAGE = true income / (physical hrs/wk x working weeks) — THIS IS THE HEADLINE NUMBER for each job.
+- Delta: Job B minus Job A in true income ($/yr) and effective wage ($/hr)
+
+OUTPUT:
+- Big bold effective hourly wage for each job
+- Winner banner: which job wins and by how much per year
+- Simple stacked bar chart per job: gross, then deductions stacked down to true income (Chart.js or Recharts is fine, nothing fancier)
+- One plain-English verdict sentence, e.g. "The $5/hr raise is real — but only in the busy months."
+- "Share" button that renders a clean, screenshot-friendly summary card (both jobs' effective wages + verdict) sized for a Facebook post
+- Optional: localStorage to save the comparison
+
+EDGE CASES / VALIDATION: no divide-by-zero (hours inputs minimum 1), negative true income displays in red, flat-rate with zero benefits must work cleanly, all currency formatted with commas and 2 decimals, effective wage to 2 decimals. Test with: flat rate $32/hr, flags 40 normally, 20 slow weeks at 25 hrs, 50 physical hrs/wk, $1,350/mo tool payment, no benefits, 30-mi commute — verify outputs are sane and consistent.

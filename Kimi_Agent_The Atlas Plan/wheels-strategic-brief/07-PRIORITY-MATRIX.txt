@@ -1,0 +1,123 @@
+================================================================================
+WHEELS STRATEGIC BRIEF — 07: PRIORITY MATRIX
+Impact vs. Effort. This is how we decide what to build first.
+================================================================================
+
+HIGH IMPACT / LOW EFFORT — QUICK WINS
+--------------------------------------
+These pay for themselves fast. Do them in Month 1.
+
+1. Pay Stub OCR (P0)
+   Effort: Low (Tesseract.js or AWS Textract)
+   Impact: Nuclear. This is the reason mechanics open the app.
+   Risk: Legal (wage disclosure laws vary by state)
+   Success metric: 500+ verified stubs in first 30 days
+
+2. Voice-First Reviews (P0)
+   Effort: Low (Whisper API integration)
+   Impact: 3x review submission rate
+   Risk: Privacy (recording in shops), accuracy (background noise)
+   Success metric: 3x review volume, 85% transcription accuracy
+
+3. Dark Mode Polish / Shop Floor Aesthetic (P0)
+   Effort: Low (CSS overhaul)
+   Impact: Brand differentiation. Makes the app feel like it belongs 
+   in a mechanic's pocket, not a banker's.
+   Risk: None
+   Success metric: User feedback scores improve 20%
+
+HIGH IMPACT / MEDIUM EFFORT — MAJOR BETS
+-----------------------------------------
+These define the product. Do them in Months 2-4.
+
+4. Culture Score Algorithm (P1)
+   Effort: Medium (NLP pipeline, radar chart UI)
+   Impact: Replaces lazy 1-5 stars with real intelligence
+   Risk: Gaming (shops incentivizing positive reviews)
+   Success metric: 80% of reviews include culture tags
+
+5. Tool Inventory OS (P1)
+   Effort: Medium (receipt OCR, depreciation engine, marketplace)
+   Impact: Daily utility. Stickiness no competitor has.
+   Risk: Complexity (tool taxonomies are massive)
+   Success metric: 10,000+ tool inventories created in 6 months
+
+6. Tri-State Review System (P1)
+   Effort: Medium (verification pipeline, badge system, weighting algo)
+   Impact: Trust architecture that Glassdoor never built
+   Risk: Fraud (fake verification documents)
+   Success metric: 40% of reviews are verified within 3 months
+
+HIGH IMPACT / HIGH EFFORT — MOONSHOTS
+--------------------------------------
+These are your moat. Do them in Months 6-12.
+
+7. Union API Integration (P0)
+   Effort: High (bureaucratic partnerships, API development)
+   Impact: Instant credibility. 2.1M verified users. Institutional revenue.
+   Risk: Unions move slow. Politics.
+   Success metric: 3 partnerships in 6 months, 50K verified members
+
+8. The Bench (Passive Job Market) (P2)
+   Effort: High (matching algorithm, offer negotiation, anonymity)
+   Impact: Complete disruption of how mechanics find jobs
+   Risk: Low mechanic adoption if not enough shop demand
+   Success metric: 1,000 mechanics on The Bench within 6 months
+
+9. Predictive Turnover Alerts (P2)
+   Effort: High (ML model, data pipeline, shop dashboard)
+   Impact: Premium revenue. Shop retention gold.
+   Risk: Accuracy (false positives damage credibility)
+   Success metric: 60% accuracy on turnover predictions
+
+MEDIUM IMPACT / LOW EFFORT — FILL-INS
+--------------------------------------
+Do these when you have downtime or a junior dev needs a project.
+
+10. Custom Maps Layer
+    Effort: Low (Google Maps API + overlay data)
+    Impact: Nice UX improvement
+    Risk: None
+    Success metric: 30% of users use map view
+
+11. Review Escrow (48-hour hold)
+    Effort: Low (queue system, notification pipeline)
+    Impact: Reduces shop retaliation, improves shop relations
+    Risk: Mechanics may perceive as censorship
+    Success metric: 20% reduction in disputed reviews
+
+MEDIUM IMPACT / MEDIUM EFFORT — BALANCED
+-----------------------------------------
+Build these in Phase 2 if resources allow.
+
+12. AI Shop Inspector
+    Effort: Medium (multimodal AI, photo upload, report generation)
+    Impact: Differentiator. Safety focus builds trust.
+    Risk: False positives on safety violations
+    Success metric: 500 inspections in first 3 months
+
+13. AR Tool Visualization
+    Effort: Medium (ARKit/ARCore, vision model)
+    Impact: Cool factor. Tool affiliate revenue.
+    Risk: Hardware requirements limit adoption
+    Success metric: 70% recognition accuracy
+
+LOW IMPACT / ANY EFFORT — TRAPS
+--------------------------------
+Do not build these. They are time sinks.
+
+14. Blockchain Certification Verification
+    Effort: High
+    Impact: Low (market not ready, credentialing bodies are slow)
+    Why skip: Premature. Start conversations but don't build yet.
+
+15. Custom Maps (replacing Google Maps entirely)
+    Effort: High
+    Impact: Low (Google Maps is fine, commodity feature)
+    Why skip: Your energy is better spent on pay transparency.
+
+16. Social Features (friend lists, messaging)
+    Effort: Medium
+    Impact: Low (mechanics don't want another Facebook)
+    Why skip: Focus on utility, not social. The SOS Network is the 
+    only social feature that matters.

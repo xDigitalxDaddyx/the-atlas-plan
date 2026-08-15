@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Pay Comparison Diagnostic Printout — Run The Numbers v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --desk:      #1c1a16;
+    --paper:     #f7f3eb;
+    --paper-dim: #e8e2d4;
+    --ink:       #1a1a1a;
+    --ink-dim:   #777;
+    --ink-fade:  #bbb;
+    --green:     #2e7d32;
+    --red:       #c62828;
+    --amber:     #e65100;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 15px; scroll-behavior: smooth; }
+  body {
+    font-family: 'Courier Prime', 'Courier New', monospace;
+    background: var(--desk);
+    color: var(--ink);
+    min-height: 100vh;
+    -webkit-tap-highlight-color: transparent;
+    line-height: 1.5;
+    display: flex; justify-content: center; align-items: flex-start;
+    padding: 24px 12px;
+    /* Desk texture — subtle wood grain */
+    background-image:
+      repeating-linear-gradient(2deg, transparent, transparent 3px, rgba(0,0,0,0.03) 3px, rgba(0,0,0,0.03) 6px);
+  }
+
+  /* ═══════════ THE RECEIPT STRIP ═══════════ */
+  .tape {
+    background: linear-gradient(180deg, #faf6ee 0%, #f3ede2 50%, #f0ead8 100%);
+    max-width: 420px; width: 100%;
+    padding: 0; position: relative;
+    box-shadow:
+      0 1px 3px rgba(0,0,0,0.2),
+      0 4px 12px rgba(0,0,0,0.15),
+      0 0 0 1px rgba(0,0,0,0.05);
+    /* Slight curl at top */
+    clip-path: polygon(
+      0% 6px, 3% 0px, 10% 4px, 25% 1px, 40% 5px, 55% 0px, 70% 4px, 85% 2px, 97% 0px, 100% 6px,
+      100% 100%, 0% 100%
+    );
+  }
+  /* Perforation line at top */
+  .tape::before {
+    content: ''; display: block; height: 8px;
+    background: repeating-linear-gradient(90deg, var(--ink-fade) 0px, var(--ink-fade) 4px, transparent 4px, transparent 8px);
+    opacity: 0.4; margin-bottom: 12px;
+  }
+  /* Perforation at bottom */
+  .tape-foot {
+    height: 8px;
+    background: repeating-linear-gradient(90deg, var(--ink-fade) 0px, var(--ink-fade) 4px, transparent 4px, transparent 8px);
+    opacity: 0.4; margin-top: 12px;
+  }
+
+  .tape-inner { padding: 0 22px 16px; }
+
+  /* ═══════════ HEADER ═══════════ */
+  .print-header {
+    text-align: center; padding-bottom: 8px;
+    border-bottom: 1px dashed var(--ink-fade); margin-bottom: 10px;
+  }
+  .print-header .shop {
+    font-size: 0.82rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink);
+  }
+  .print-header .sub {
+    font-size: 0.56rem; color: var(--ink-dim); letter-spacing: 0.08em;
+    margin-top: 1px;
+  }
+  .print-meta {
+    display: flex; justify-content: space-between;
+    font-size: 0.5rem; color: var(--ink-dim); margin-top: 4px;
+  }
+
+  /* Asterisk divider */
+  .ast-div {
+    text-align: center; font-size: 0.52rem; color: var(--ink-fade);
+    letter-spacing: 0.3em; padding: 6px 0;
+  }
+
+  /* ═══════════ JOB DATA — parameter-list style ═══════════ */
+  .job-section {
+    margin-bottom: 4px;
+  }
+  .job-section .job-title {
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 4px 0 2px;
+  }
+  .job-a .job-title { color: var(--ink); }
+  .job-b .job-title { color: var(--ink); }
+  .job-a .job-title::before { content: 'JOB A  '; }
+  .job-b .job-title::before { content: 'JOB B  '; }
+
+  .param {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 0.6rem; padding: 2px 0;
+    border-bottom: 1px dotted rgba(0,0,0,0.06);
+  }
+  .param .key { color: var(--ink-dim); text-transform: uppercase; font-size: 0.54rem; letter-spacing: 0.04em; }
+  .param .val { color: var(--ink); font-weight: 400; }
+
+  /* Inline inputs — look like blanks on the printout */
+  .param input, .param select {
+    background: transparent; border: none; border-bottom: 1px solid var(--ink-fade);
+    font-family: 'Courier Prime', monospace; font-size: 0.6rem;
+    color: var(--ink); padding: 1px 2px; width: 100px; text-align: right;
+    -webkit-appearance: none; appearance: none; border-radius: 0;
+    outline: none;
+  }
+  .param select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath fill='%23777' d='M4 6L1 2h6z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 2px center;
+    padding-right: 12px; text-align: left; width: auto; cursor: pointer;
+  }
+  .param select option { background: var(--paper); color: var(--ink); }
+  .param input:focus, .param select:focus { border-bottom-color: var(--ink); }
+  .param input[type="number"] { -moz-appearance: textfield; }
+  .param input[type="number"]::-webkit-inner-spin-button,
+  .param input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  .param .note {
+    font-size: 0.44rem; color: var(--ink-fade); display: block; text-align: right; font-style: italic;
+  }
+
+  /* Hidden conditional fields */
+  .conditional { display: none; }
+  .conditional.visible { display: block; }
+
+  /* Toggle — rendered as a slash-choice on printout */
+  .toggle-print {
+    display: flex; align-items: center; gap: 6px; font-size: 0.54rem;
+    color: var(--ink-dim); cursor: pointer; user-select: none;
+    padding: 2px 0;
+  }
+  .toggle-print .box {
+    width: 12px; height: 12px;
+    border: 1px solid var(--ink-dim);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.5rem;
+  }
+  .toggle-print.on .box::after { content: 'X'; color: var(--ink); }
+
+  /* ═══════════ CALCULATE — as a bold printout command ═══════════ */
+  .calc-row {
+    text-align: center; padding: 14px 0 8px;
+  }
+  .calc-btn {
+    background: transparent; border: 2px solid var(--ink);
+    color: var(--ink); font-family: 'Courier Prime', monospace;
+    font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.16em;
+    padding: 10px 32px; cursor: pointer;
+    width: 100%; max-width: 320px;
+    transition: background 0.12s, color 0.12s;
+    position: relative; overflow: hidden;
+  }
+  .calc-btn:hover { background: var(--ink); color: var(--paper); }
+  .calc-btn:active { transform: scale(0.99); }
+  .calc-btn .ripple {
+    position: absolute; border-radius: 50%;
+    background: rgba(0,0,0,0.15);
+    transform: scale(0); animation: ripple 0.45s ease-out; pointer-events: none;
+  }
+  @keyframes ripple { to { transform: scale(4); opacity: 0; } }
+
+  /* ═══════════ RESULTS ═══════════ */
+  #results {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+  #results.visible { max-height: 5000px; }
+
+  /* Result readout — like a diagnostic comparison */
+  .result-block {
+    border: 1px solid var(--ink-fade); padding: 10px 14px; margin-bottom: 10px;
+    position: relative;
+  }
+  .result-block .diag-label {
+    font-size: 0.5rem; color: var(--ink-dim); text-transform: uppercase;
+    letter-spacing: 0.1em; margin-bottom: 6px;
+  }
+  .result-comparison {
+    display: flex; justify-content: space-around; gap: 12px;
+    padding: 8px 0;
+  }
+  .result-cell {
+    text-align: center; flex: 1;
+  }
+  .result-cell .big-num {
+    font-size: 1.5rem; font-weight: 700; line-height: 1.1;
+  }
+  .result-cell .big-num.green { color: var(--green); }
+  .result-cell .big-num.red { color: var(--red); }
+  .result-cell .big-num.neutral { color: var(--ink); }
+  .result-cell .big-num.amber { color: var(--amber); }
+  .result-cell .unit { font-size: 0.5rem; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.1em; }
+  .result-cell .sub-num { font-size: 0.56rem; color: var(--ink-dim); margin-top: 3px; }
+
+  /* PASS / FAIL stamp */
+  .stamp {
+    display: inline-block; padding: 2px 10px; border: 2px solid;
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.16em; transform: rotate(-3deg);
+    margin: 6px 0; opacity: 0.85;
+  }
+  .stamp.pass { color: var(--green); border-color: var(--green); }
+  .stamp.fail { color: var(--red); border-color: var(--red); }
+  .stamp.warn { color: var(--amber); border-color: var(--amber); }
+  .stamp-wrap { text-align: center; padding: 6px 0; }
+
+  /* Breakdown table */
+  .break-table {
+    width: 100%; font-size: 0.55rem; margin-top: 8px;
+    border-collapse: collapse;
+  }
+  .break-table td {
+    padding: 2px 4px; border-bottom: 1px dotted rgba(0,0,0,0.06);
+  }
+  .break-table .lbl { color: var(--ink-dim); }
+  .break-table .amt { text-align: right; color: var(--ink); }
+  .break-table .total-row td { border-top: 1px solid var(--ink-fade); font-weight: 700; padding-top: 4px; }
+
+  /* Verdict */
+  .verdict-line {
+    font-size: 0.6rem; color: var(--ink); line-height: 1.6;
+    padding: 8px 0; font-style: italic;
+    border-top: 1px dashed var(--ink-fade);
+    margin-top: 8px;
+  }
+  .verdict-line em { font-style: normal; font-weight: 700; color: var(--green); }
+
+  /* Button row — on printout */
+  .action-row {
+    display: flex; gap: 6px; padding: 8px 0 0;
+    border-top: 1px dashed var(--ink-fade); margin-top: 8px;
+  }
+  .btn-sec {
+    flex: 1; padding: 8px 10px;
+    background: transparent; border: 1px solid var(--ink-fade);
+    color: var(--ink-dim); font-family: 'Courier Prime', monospace;
+    font-size: 0.52rem; text-transform: uppercase; letter-spacing: 0.08em;
+    cursor: pointer; transition: border-color 0.12s, color 0.12s;
+    text-align: center;
+  }
+  .btn-sec:hover { border-color: var(--ink); color: var(--ink); }
+  .btn-sec.primary { border-color: var(--ink); color: var(--ink); font-weight: 700; }
+
+  /* Chart — embedded in printout */
+  .print-chart {
+    border: 1px solid var(--ink-fade); padding: 10px; margin-bottom: 10px;
+  }
+  .print-chart h4 {
+    font-size: 0.5rem; color: var(--ink-dim); text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 8px; font-weight: 400;
+  }
+  .print-chart canvas { max-height: 200px; }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 28px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--ink); color: var(--paper);
+    padding: 10px 22px; font-family: 'Courier Prime', monospace;
+    font-size: 0.64rem; letter-spacing: 0.06em; z-index: 200;
+    transition: transform 0.3s cubic-bezier(0.34, 1.3, 0.64, 1); pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* Share overlay — looks like a photocopy */
+  .share-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.92); z-index: 100;
+    justify-content: center; align-items: center; padding: 16px;
+  }
+  .share-overlay.visible { display: flex; }
+  .share-card {
+    background: var(--paper); max-width: 420px; width: 100%;
+    padding: 20px 22px; text-align: center;
+    animation: cardUp 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  @keyframes cardUp {
+    from { opacity: 0; transform: translateY(16px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .share-card h2 { font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+  .share-card h2 b { color: var(--green); }
+  .share-compare { display: flex; justify-content: center; gap: 24px; margin-bottom: 12px; }
+  .share-compare .val { text-align: center; }
+  .share-compare .val .big { font-size: 1.4rem; font-weight: 700; color: var(--green); }
+  .share-compare .val .lbl { font-size: 0.5rem; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+  .share-verdict { font-size: 0.7rem; font-style: italic; color: var(--ink); margin-bottom: 14px; padding: 8px; border: 1px solid var(--ink-fade); }
+  .btn-s { padding: 8px 18px; border: 1px solid var(--ink-fade); background: transparent; font-family: 'Courier Prime', monospace; font-size: 0.56rem; cursor: pointer; text-transform: uppercase; color: var(--ink-dim); }
+  .btn-s:hover { border-color: var(--ink); color: var(--ink); }
+  .btn-s.primary { border-color: var(--green); color: var(--green); margin-left: 6px; }
+  .btn-s.primary:hover { background: rgba(46,125,50,0.06); }
+</style>
+</head>
+<body>
+
+<div class="tape">
+  <div class="tape-inner">
+
+    <!-- Header -->
+    <div class="print-header">
+      <div class="shop">S H O P &nbsp; A N A L Y Z E R</div>
+      <div class="sub">Pay Comparison Diagnostic · v3</div>
+      <div class="print-meta">
+        <span>S/N: R23-8874-K</span>
+        <span id="ts">—</span>
+      </div>
+    </div>
+
+    <div class="ast-div">* * *</div>
+
+    <!-- ═══════ JOB A — parameter readout ═══════ -->
+    <div class="job-section job-a">
+      <div class="job-title">— PARAMETERS —</div>
+
+      <div class="param">
+        <span class="key">Pay Type</span>
+        <select id="payTypeA" onchange="toggleFields('A')">
+          <option value="flat-rate">FLAT RATE</option>
+          <option value="hourly">HOURLY</option>
+          <option value="salary">SALARY</option>
+        </select>
+      </div>
+      <div class="param">
+        <span class="key" id="rateLabelA">RATE ($/HR)</span>
+        <input type="number" id="rateA" value="32" min="0" step="0.01">
+      </div>
+
+      <div class="conditional" id="flatFieldsA">
+        <div class="param"><span class="key">FLAGGED HRS/WK</span><input type="number" id="flaggedHrsA" value="40" min="1" step="0.5"></div>
+        <div class="param"><span class="key">SLOW WEEKS/YR</span><input type="number" id="slowWeeksA" value="0" min="0" max="52" step="1"></div>
+        <div class="param"><span class="key">SLOW FLAG HRS/WK</span><input type="number" id="slowHrsA" value="25" min="1" step="0.5"></div>
+      </div>
+
+      <div class="conditional" id="overtimeToggleA">
+        <div class="param">
+          <span class="key">OVERTIME (1.5X)</span>
+          <span class="toggle-print" id="otToggleA" onclick="toggleOT('A')">
+            <span class="box"></span> OFF / ON
+          </span>
+        </div>
+      </div>
+
+      <div class="param"><span class="key">PHYSICAL HRS/WK</span><input type="number" id="physicalHrsA" value="40" min="1" step="0.5"><span class="note">actual time at shop</span></div>
+      <div class="param"><span class="key">INSURANCE ($/MO)</span><input type="number" id="insuranceA" value="0" min="0" step="0.01"></div>
+      <div class="param"><span class="key">401K MATCH (%)</span><input type="number" id="match401kA" value="0" min="0" max="100" step="0.01"></div>
+      <div class="param"><span class="key">PAID DAYS OFF</span><input type="number" id="ptoA" value="0" min="0" max="365" step="1"></div>
+      <div class="param"><span class="key">TOOL ALLOW. ($/YR)</span><input type="number" id="toolAllowanceA" value="0" min="0" step="0.01"></div>
+      <div class="param"><span class="key">TOOL COSTS ($/YR)</span><input type="number" id="toolCostsA" value="0" min="0" step="0.01"><span class="note">truck payments + new tools</span></div>
+      <div class="param"><span class="key">COMMUTE (MI/DAY)</span><input type="number" id="commuteA" value="0" min="0" step="0.1"><span class="note">mi × $0.70 × work days</span></div>
+    </div>
+
+    <div class="ast-div">* * *</div>
+
+    <!-- ═══════ JOB B — parameter readout ═══════ -->
+    <div class="job-section job-b">
+      <div class="job-title">— PARAMETERS —</div>
+
+      <div class="param">
+        <span class="key">Pay Type</span>
+        <select id="payTypeB" onchange="toggleFields('B')">
+          <option value="flat-rate">FLAT RATE</option>
+          <option value="hourly" selected>HOURLY</option>
+          <option value="salary">SALARY</option>
+        </select>
+      </div>
+      <div class="param">
+        <span class="key" id="rateLabelB">RATE ($/HR)</span>
+        <input type="number" id="rateB" value="35" min="0" step="0.01">
+      </div>
+
+      <div class="conditional" id="flatFieldsB">
+        <div class="param"><span class="key">FLAGGED HRS/WK</span><input type="number" id="flaggedHrsB" value="40" min="1" step="0.5"></div>
+        <div class="param"><span class="key">SLOW WEEKS/YR</span><input type="number" id="slowWeeksB" value="0" min="0" max="52" step="1"></div>
+        <div class="param"><span class="key">SLOW FLAG HRS/WK</span><input type="number" id="slowHrsB" value="25" min="1" step="0.5"></div>
+      </div>
+
+      <div class="conditional" id="overtimeToggleB">
+        <div class="param">
+          <span class="key">OVERTIME (1.5X)</span>
+          <span class="toggle-print on" id="otToggleB" onclick="toggleOT('B')">
+            <span class="box"></span> OFF / ON
+          </span>
+        </div>
+      </div>
+
+      <div class="param"><span class="key">PHYSICAL HRS/WK</span><input type="number" id="physicalHrsB" value="40" min="1" step="0.5"><span class="note">actual time at shop</span></div>
+      <div class="param"><span class="key">INSURANCE ($/MO)</span><input type="number" id="insuranceB" value="0" min="0" step="0.01"></div>
+      <div class="param"><span class="key">401K MATCH (%)</span><input type="number" id="match401kB" value="0" min="0" max="100" step="0.01"></div>
+      <div class="param"><span class="key">PAID DAYS OFF</span><input type="number" id="ptoB" value="0" min="0" max="365" step="1"></div>
+      <div class="param"><span class="key">TOOL ALLOW. ($/YR)</span><input type="number" id="toolAllowanceB" value="0" min="0" step="0.01"></div>
+      <div class="param"><span class="key">TOOL COSTS ($/YR)</span><input type="number" id="toolCostsB" value="0" min="0" step="0.01"><span class="note">truck payments + new tools</span></div>
+      <div class="param"><span class="key">COMMUTE (MI/DAY)</span><input type="number" id="commuteB" value="0" min="0" step="0.1"><span class="note">mi × $0.70 × work days</span></div>
+    </div>
+
+    <!-- Calculate button -->
+    <div class="calc-row">
+      <button class="calc-btn" id="calcBtn" onclick="calculate(true)">[ Run Analysis ]</button>
+    </div>
+
+    <div class="ast-div">* * *</div>
+
+    <!-- ═══════ RESULTS ═══════ -->
+    <div id="results">
+      <div class="result-block" id="resultBlock">
+        <div class="diag-label">DIAGNOSTIC COMPARISON</div>
+        <div class="result-comparison" id="resultComparison">
+          <div class="result-cell" id="cellA">
+            <div class="big-num" id="wageA">—</div>
+            <div class="unit">$/HR EFFECTIVE</div>
+            <div class="sub-num" id="incomeA"></div>
+          </div>
+          <div class="result-cell" style="align-self:center;flex:0 0 auto;font-size:0.7rem;color:var(--ink-dim);">VS</div>
+          <div class="result-cell" id="cellB">
+            <div class="big-num" id="wageB">—</div>
+            <div class="unit">$/HR EFFECTIVE</div>
+            <div class="sub-num" id="incomeB"></div>
+          </div>
+        </div>
+        <div class="stamp-wrap" id="stampWrap"></div>
+        <table class="break-table" id="breakTable"></table>
+      </div>
+
+      <div class="print-chart">
+        <h4>FIG 1. Income Breakdown</h4>
+        <canvas id="breakdownChart"></canvas>
+      </div>
+
+      <div class="verdict-line" id="verdict"></div>
+
+      <div class="action-row">
+        <button class="btn-sec" onclick="saveToLocal()">Save to Log</button>
+        <button class="btn-sec" onclick="loadFromLocal()">Load Log</button>
+        <button class="btn-sec primary" onclick="showShare()">Print Share</button>
+      </div>
+    </div>
+
+    <div class="ast-div">* * *</div>
+    <div style="text-align:center;font-size:0.44rem;color:var(--ink-fade);padding-bottom:4px;">
+      END OF REPORT &middot; #RunTheNumbers
+    </div>
+    <div class="tape-foot"></div>
+  </div>
+</div>
+
+<!-- Share overlay -->
+<div class="share-overlay" id="shareOverlay" onclick="if(event.target===this)hideShare()">
+  <div class="share-card" id="shareCapture">
+    <h2>Shop Analyzer — <b>Comparison</b></h2>
+    <div class="share-compare" id="shareWages"></div>
+    <div class="share-verdict" id="shareVerdict"></div>
+    <button class="btn-s" onclick="hideShare()">Close</button>
+    <button class="btn-s primary" onclick="copyShare()">Copy</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════ IDENTICAL JS LOGIC ═══════════ */
+
+const state = { overTimeA: false, overTimeB: true, lastCalc: null };
+let chartInstance = null;
+let toastTimer = null;
+
+document.getElementById('ts').textContent = new Date().toISOString().replace('T',' ').slice(0,19);
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+}
+
+function toggleFields(which) {
+  const type = document.getElementById('payType' + which).value;
+  document.getElementById('flatFields' + which).classList.toggle('visible', type === 'flat-rate');
+  document.getElementById('overtimeToggle' + which).classList.toggle('visible', type === 'hourly');
+  document.getElementById('rateLabel' + which).textContent = type === 'salary' ? 'SALARY ($/YR)' : 'RATE ($/HR)';
+}
+
+function toggleOT(which) {
+  state['overTime' + which] = !state['overTime' + which];
+  document.getElementById('otToggle' + which).classList.toggle('on', state['overTime' + which]);
+}
+
+function gv(id) { const v = parseFloat(document.getElementById(id).value); return isNaN(v) ? 0 : v; }
+function fmtCurrency(n) {
+  const s = Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return (n < 0 ? '-$' : '$') + s;
+}
+
+function computeJob(which) {
+  const type = document.getElementById('payType' + which).value;
+  const rate = gv('rate' + which);
+  const physicalHrs = gv('physicalHrs' + which);
+  const insurance = gv('insurance' + which);
+  const match401k = gv('match401k' + which) / 100;
+  const ptoDays = gv('pto' + which);
+  const toolAllowance = gv('toolAllowance' + which);
+  const toolCosts = gv('toolCosts' + which);
+  const commute = gv('commute' + which);
+  const workingWeeks = Math.max(1, Math.round(52 - (ptoDays / 5)));
+  const workingDays = workingWeeks * 5;
+  let gross = 0;
+  if (type === 'salary') { gross = rate; }
+  else if (type === 'hourly') {
+    if (state['overTime' + which] && physicalHrs > 40)
+      gross = (rate * 40 * workingWeeks) + (rate * 1.5 * (physicalHrs - 40) * workingWeeks);
+    else gross = rate * physicalHrs * workingWeeks;
+  } else if (type === 'flat-rate') {
+    const flaggedHrs = gv('flaggedHrs' + which);
+    const slowWeeks = Math.min(workingWeeks, gv('slowWeeks' + which));
+    const slowHrs = gv('slowHrs' + which);
+    gross = rate * ((flaggedHrs * (workingWeeks - slowWeeks)) + (slowHrs * slowWeeks));
+  }
+  const commuteCost = commute * 0.70 * workingDays;
+  const matchValue = match401k * gross;
+  const trueIncome = gross - (12 * insurance) - toolCosts + toolAllowance - commuteCost + matchValue;
+  const totalPhysicalHrs = physicalHrs * workingWeeks;
+  return {
+    type, rate, physicalHrs, insurance, match401k: match401k * 100, ptoDays,
+    toolAllowance, toolCosts, commute, workingWeeks, workingDays,
+    gross, commuteCost, matchValue, trueIncome, totalPhysicalHrs,
+    effectiveWage: trueIncome / totalPhysicalHrs,
+    flaggedHrs: gv('flaggedHrs' + which),
+    slowWeeks: Math.min(workingWeeks, gv('slowWeeks' + which)),
+    slowHrs: gv('slowHrs' + which),
+    useOT: state['overTime' + which]
+  };
+}
+
+function calculate(scrollToResults) {
+  const jobA = computeJob('A'), jobB = computeJob('B');
+  state.lastCalc = { jobA, jobB };
+  const deltaIncome = jobB.trueIncome - jobA.trueIncome;
+  const deltaWage = jobB.effectiveWage - jobA.effectiveWage;
+  let winnerSide = Math.abs(deltaIncome) < 0.01 ? 'tie' : (deltaIncome > 0 ? 'b' : 'a');
+
+  document.getElementById('results').classList.add('visible');
+  autoSave();
+
+  // Wage display
+  const wageA = document.getElementById('wageA');
+  const wageB = document.getElementById('wageB');
+  const incomeA = document.getElementById('incomeA');
+  const incomeB = document.getElementById('incomeB');
+
+  wageA.textContent = fmtCurrency(jobA.effectiveWage);
+  wageB.textContent = fmtCurrency(jobB.effectiveWage);
+  incomeA.textContent = 'Take-home: ' + fmtCurrency(jobA.trueIncome) + '/yr';
+  incomeB.textContent = 'Take-home: ' + fmtCurrency(jobB.trueIncome) + '/yr';
+
+  if (jobA.effectiveWage < 0) wageA.className = 'big-num red';
+  else if (winnerSide === 'a') wageA.className = 'big-num green';
+  else wageA.className = 'big-num neutral';
+
+  if (jobB.effectiveWage < 0) wageB.className = 'big-num red';
+  else if (winnerSide === 'b') wageB.className = 'big-num green';
+  else wageB.className = 'big-num neutral';
+
+  if (jobA.trueIncome < 0) incomeA.style.color = 'var(--red)'; else incomeA.style.color = '';
+  if (jobB.trueIncome < 0) incomeB.style.color = 'var(--red)'; else incomeB.style.color = '';
+
+  // Stamp
+  const stamp = document.getElementById('stampWrap');
+  if (winnerSide === 'tie') {
+    stamp.innerHTML = '<span class="stamp warn">PASS — TIE</span>';
+  } else if (winnerSide === 'b') {
+    stamp.innerHTML = '<span class="stamp pass">JOB B +' + fmtCurrency(Math.abs(deltaIncome)) + '/YR</span>';
+  } else {
+    stamp.innerHTML = '<span class="stamp pass">JOB A +' + fmtCurrency(Math.abs(deltaIncome)) + '/YR</span>';
+  }
+
+  // Breakdown table
+  const tbl = document.getElementById('breakTable');
+  tbl.innerHTML =
+    '<tr><td class="lbl" colspan="2" style="font-weight:700;padding-top:2px;">JOB A</td></tr>' +
+    '<tr><td class="lbl">Gross</td><td class="amt">' + fmtCurrency(jobA.gross) + '</td></tr>' +
+    '<tr><td class="lbl">&minus; Insurance</td><td class="amt">' + fmtCurrency(12*jobA.insurance) + '</td></tr>' +
+    '<tr><td class="lbl">&minus; Tools</td><td class="amt">' + fmtCurrency(jobA.toolCosts) + '</td></tr>' +
+    '<tr><td class="lbl">+ Allowance</td><td class="amt">' + fmtCurrency(jobA.toolAllowance) + '</td></tr>' +
+    '<tr><td class="lbl">&minus; Commute</td><td class="amt">' + fmtCurrency(jobA.commuteCost) + '</td></tr>' +
+    '<tr><td class="lbl">+ 401k Match</td><td class="amt">' + fmtCurrency(jobA.matchValue) + '</td></tr>' +
+    '<tr class="total-row"><td class="lbl">NET</td><td class="amt">' + fmtCurrency(jobA.trueIncome) + '</td></tr>' +
+    '<tr><td class="lbl" colspan="2" style="font-weight:700;padding-top:6px;">JOB B</td></tr>' +
+    '<tr><td class="lbl">Gross</td><td class="amt">' + fmtCurrency(jobB.gross) + '</td></tr>' +
+    '<tr><td class="lbl">&minus; Insurance</td><td class="amt">' + fmtCurrency(12*jobB.insurance) + '</td></tr>' +
+    '<tr><td class="lbl">&minus; Tools</td><td class="amt">' + fmtCurrency(jobB.toolCosts) + '</td></tr>' +
+    '<tr><td class="lbl">+ Allowance</td><td class="amt">' + fmtCurrency(jobB.toolAllowance) + '</td></tr>' +
+    '<tr><td class="lbl">&minus; Commute</td><td class="amt">' + fmtCurrency(jobB.commuteCost) + '</td></tr>' +
+    '<tr><td class="lbl">+ 401k Match</td><td class="amt">' + fmtCurrency(jobB.matchValue) + '</td></tr>' +
+    '<tr class="total-row"><td class="lbl">NET</td><td class="amt">' + fmtCurrency(jobB.trueIncome) + '</td></tr>';
+
+  renderChart(jobA, jobB);
+  renderVerdict(jobA, jobB, deltaIncome, deltaWage, winnerSide);
+
+  if (scrollToResults)
+    setTimeout(() => document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+
+  return { jobA, jobB, deltaIncome, deltaWage, winnerSide };
+}
+
+function renderChart(jobA, jobB) {
+  if (chartInstance) chartInstance.destroy();
+  const ctx = document.getElementById('breakdownChart').getContext('2d');
+  const sA = jobA.gross - (12*jobA.insurance + jobA.toolCosts - jobA.toolAllowance + jobA.commuteCost - jobA.matchValue);
+  const sB = jobB.gross - (12*jobB.insurance + jobB.toolCosts - jobB.toolAllowance + jobB.commuteCost - jobB.matchValue);
+  chartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Job A', 'Job B'],
+      datasets: [
+        { label: 'Deductions', data: [jobA.gross - sA, jobB.gross - sB], backgroundColor: 'rgba(198,40,40,0.2)', borderColor: 'rgba(198,40,40,0.35)', borderWidth: 1, borderRadius: 0, borderSkipped: false, order: 1 },
+        { label: 'Take-Home', data: [sA, sB], backgroundColor: [sA >= 0 ? 'rgba(46,125,50,0.4)' : 'rgba(198,40,40,0.4)', sB >= 0 ? 'rgba(46,125,50,0.4)' : 'rgba(198,40,40,0.4)'], borderColor: [sA >= 0 ? '#2e7d32' : '#c62828', sB >= 0 ? '#2e7d32' : '#c62828'], borderWidth: 1, borderRadius: 0, borderSkipped: false, order: 2 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true, animation: { duration: 400, easing: 'easeOutCubic' },
+      plugins: {
+        legend: { position: 'bottom', labels: { color: '#777', font: { size: 10, family: 'Courier Prime, monospace' }, padding: 14, usePointStyle: true, pointStyleWidth: 6 } },
+        tooltip: { callbacks: { label: function(c) { return c.dataset.label + ': ' + fmtCurrency(c.raw); } } }
+      },
+      scales: {
+        x: { stacked: true, ticks: { color: '#777', font: { size: 11, family: 'Courier Prime, monospace' } }, grid: { display: false } },
+        y: { stacked: true, ticks: { color: '#999', font: { size: 9, family: 'Courier Prime, monospace' }, callback: function(v) { return v >= 1000 ? '$' + (v/1000).toFixed(0) + 'k' : '$' + v; } }, grid: { color: 'rgba(0,0,0,0.06)' } }
+      }
+    }
+  });
+}
+
+function renderVerdict(jobA, jobB, deltaIncome, deltaWage, winnerSide) {
+  const el = document.getElementById('verdict');
+  const aType = jobA.type === 'flat-rate' ? 'flat rate' : jobA.type;
+  const bType = jobB.type === 'flat-rate' ? 'flat rate' : jobB.type;
+  const aRate = jobA.type === 'salary' ? fmtCurrency(jobA.rate) + '/yr' : fmtCurrency(jobA.rate) + '/hr';
+  const bRate = jobB.type === 'salary' ? fmtCurrency(jobB.rate) + '/yr' : fmtCurrency(jobB.rate) + '/hr';
+  let v = '';
+  if (winnerSide === 'tie') {
+    v = 'DIAGNOSIS: Dead even. Both jobs net the same. ';
+    v += Math.abs(jobA.gross - jobB.gross) > 0.01
+      ? (jobA.gross > jobB.gross ? 'Job A has the bigger headline number, but deductions eat the difference. <em>Gross pay is not net pay.</em>' : 'Job B has the bigger headline number, but deductions eat the difference. <em>Gross pay is not net pay.</em>')
+      : 'All costs accounted, it\'s a wash. Pick based on culture, commute, and growth.';
+  } else if (winnerSide === 'b') {
+    v = 'DIAGNOSIS: <em>Job B wins</em> by ' + fmtCurrency(deltaIncome) + '/yr (' + fmtCurrency(Math.abs(deltaWage)) + '/hr more). Job B pays ' + bRate + ' (' + bType + ') vs Job A\'s ' + aRate + ' (' + aType + '). ';
+    if (jobB.gross < jobA.gross && deltaIncome > 0) v += '<em>Job A\'s gross is higher but Job B nets more.</em> Gross pay is a liar.';
+    else if (jobA.toolCosts > 0 && jobB.toolCosts === 0) v += 'Tool-truck payments on Job A are eating the difference. <em>Factor in the Snap-on man.</em>';
+    else if (jobB.commuteCost < jobA.commuteCost && Math.abs(jobB.commuteCost - jobA.commuteCost) > 500) v += 'The shorter commute on Job B adds up. <em>Miles cost more than you think.</em>';
+    else v += 'Job B is the better deal on paper. But trust your gut on shop culture too.';
+  } else {
+    v = 'DIAGNOSIS: <em>Job A wins</em> by ' + fmtCurrency(Math.abs(deltaIncome)) + '/yr (' + fmtCurrency(Math.abs(deltaWage)) + '/hr more). Job A pays ' + aRate + ' (' + aType + ') vs Job B\'s ' + bRate + ' (' + bType + '). ';
+    if (jobA.gross < jobB.gross && deltaIncome < 0) v += '<em>Job B\'s gross is higher but Job A nets more.</em> Gross pay is a liar.';
+    else if (jobB.toolCosts > 0 && jobA.toolCosts === 0) v += 'Tool-truck payments on Job B are eating the difference. <em>Don\'t forget the Snap-on man.</em>';
+    else if (jobA.commuteCost < jobB.commuteCost && Math.abs(jobA.commuteCost - jobB.commuteCost) > 500) v += 'The shorter commute on Job A adds up. <em>Miles cost more than you think.</em>';
+    else v += 'Job A is the better deal on paper. But trust your gut on shop culture too.';
+  }
+  if (jobA.type === 'flat-rate' && jobA.slowWeeks > 10) v += ' <em>NOTE:</em> Job A has ' + jobA.slowWeeks + ' slow weeks at only ' + jobA.slowHrs + ' flagged hrs — nearly ' + Math.round(jobA.slowWeeks/4) + ' months of thin paychecks.';
+  if (jobB.type === 'flat-rate' && jobB.slowWeeks > 10) v += ' <em>NOTE:</em> Job B has ' + jobB.slowWeeks + ' slow weeks at only ' + jobB.slowHrs + ' flagged hrs — nearly ' + Math.round(jobB.slowWeeks/4) + ' months of thin paychecks.';
+  if (jobA.physicalHrs > 50) v += ' Job A: <em>' + jobA.physicalHrs + ' hrs/wk</em> — effective wage accounts for every hour.';
+  if (jobB.physicalHrs > 50) v += ' Job B: <em>' + jobB.physicalHrs + ' hrs/wk</em> — effective wage accounts for every hour.';
+  el.innerHTML = v;
+}
+
+function showShare() {
+  const d = state.lastCalc || calculate(false);
+  document.getElementById('shareWages').innerHTML =
+    '<div class="val"><div class="lbl">Job A Effective</div><div class="big">' + fmtCurrency(d.jobA.effectiveWage) + '/hr</div></div>' +
+    '<div class="val"><div class="lbl">Job B Effective</div><div class="big">' + fmtCurrency(d.jobB.effectiveWage) + '/hr</div></div>';
+  document.getElementById('shareVerdict').textContent = d.winnerSide === 'tie'
+    ? 'Shop Analyzer: Dead even. Both jobs net the same.' : d.winnerSide === 'b'
+    ? 'Shop Analyzer: Job B wins by ' + fmtCurrency(d.deltaIncome) + '/yr.'
+    : 'Shop Analyzer: Job A wins by ' + fmtCurrency(Math.abs(d.deltaIncome)) + '/yr.';
+  document.getElementById('shareOverlay').classList.add('visible');
+}
+function hideShare() { document.getElementById('shareOverlay').classList.remove('visible'); }
+function copyShare() {
+  const t = (document.getElementById('shareVerdict').textContent + ' | ' + document.getElementById('shareWages').textContent).replace(/\s+/g, ' ').trim();
+  navigator.clipboard.writeText(t).then(() => toast('Copied'), () => toast('Could not copy'));
+}
+
+function getFormData() {
+  const d = {};
+  ['rate','flaggedHrs','slowWeeks','slowHrs','physicalHrs','insurance','match401k','pto','toolAllowance','toolCosts','commute'].forEach(f => { d[f+'A'] = document.getElementById(f+'A').value; d[f+'B'] = document.getElementById(f+'B').value; });
+  d.payTypeA = document.getElementById('payTypeA').value; d.payTypeB = document.getElementById('payTypeB').value;
+  d.overTimeA = state.overTimeA; d.overTimeB = state.overTimeB;
+  return d;
+}
+function setFormData(d) {
+  ['rate','flaggedHrs','slowWeeks','slowHrs','physicalHrs','insurance','match401k','pto','toolAllowance','toolCosts','commute'].forEach(f => { if (d[f+'A'] !== undefined) document.getElementById(f+'A').value = d[f+'A']; if (d[f+'B'] !== undefined) document.getElementById(f+'B').value = d[f+'B']; });
+  if (d.payTypeA) document.getElementById('payTypeA').value = d.payTypeA;
+  if (d.payTypeB) document.getElementById('payTypeB').value = d.payTypeB;
+  if (d.overTimeA !== undefined) { state.overTimeA = d.overTimeA; document.getElementById('otToggleA').classList.toggle('on', state.overTimeA); }
+  if (d.overTimeB !== undefined) { state.overTimeB = d.overTimeB; document.getElementById('otToggleB').classList.toggle('on', state.overTimeB); }
+  toggleFields('A'); toggleFields('B');
+}
+function autoSave() { try { localStorage.setItem('mechanic-calc-v3', JSON.stringify(getFormData())); } catch(e) {} }
+function saveToLocal() { try { localStorage.setItem('mechanic-calc-v3', JSON.stringify(getFormData())); toast('Logged'); } catch(e) { toast('Could not save'); } }
+function loadFromLocal() {
+  try {
+    const r = localStorage.getItem('mechanic-calc-v3'); if (!r) { toast('No log found'); return; }
+    setFormData(JSON.parse(r)); toast('Loaded from log'); calculate(true);
+  } catch(e) { toast('Could not load log'); }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('calcBtn').addEventListener('click', function(e) {
+    const rect = this.getBoundingClientRect();
+    const ripple = document.createElement('span'); ripple.className = 'ripple';
+    const s = Math.max(rect.width, rect.height);
+    ripple.style.width = ripple.style.height = s + 'px';
+    ripple.style.left = (e.clientX - rect.left - s/2) + 'px';
+    ripple.style.top = (e.clientY - rect.top - s/2) + 'px';
+    this.appendChild(ripple);
+    ripple.addEventListener('animationend', () => ripple.remove());
+  });
+});
+
+toggleFields('A'); toggleFields('B');
+</script>
+
+</body>
+</html>

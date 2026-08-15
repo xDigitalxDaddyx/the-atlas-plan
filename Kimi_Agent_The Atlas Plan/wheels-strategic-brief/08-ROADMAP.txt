@@ -1,0 +1,122 @@
+================================================================================
+WHEELS STRATEGIC BRIEF — 08: EXECUTION ROADMAP
+Phased execution. Build the engine before the body kit.
+================================================================================
+
+PHASE 1: FOUNDATION & TRUST (Months 1-3)
+-------------------------------------------
+Goal: Build the core product that mechanics trust and shops respect.
+
+Week 1-2: Infrastructure
+  - Harden PostgreSQL schema for scale (partitioning, indexing strategy)
+  - JWT auth with refresh token rotation
+  - Passkeys/WebAuthn research and pilot
+  - CI/CD pipeline (GitHub Actions, Vercel/Railway)
+
+Week 3-4: Core Data Model
+  - Shops table with DNA fields (50+ data points)
+  - Reviews table with tri-state verification
+  - Jobs table with real pay ranges (not estimates)
+  - Users table with trade, certification, union affiliation
+
+Week 5-6: Pay Transparency Layer
+  - Pay stub upload flow
+  - OCR pipeline (Tesseract.js or AWS Textract)
+  - Anonymization engine (strip PII, aggregate only)
+  - Percentile display by trade/zip code
+  - Legal review (wage disclosure compliance)
+
+Week 7-8: Review System
+  - Tri-state architecture (Anonymous / Verified-Employee / Verified-Customer)
+  - Verification pipeline (pay stub, W-2, union membership)
+  - Review weighting algorithm
+  - Community moderation (upvote/downvote, flagging)
+  - Shop response capability
+
+Week 9-10: Union API Pilot
+  - Identify 1 tech-forward union local (start with IUEC or IAMAW)
+  - Build read-only member verification API
+  - White-label pilot for union members
+  - Gather feedback, iterate
+
+Week 11-12: Polish & Launch
+  - Shop floor aesthetic overhaul (dark theme, grease textures, OSHA colors)
+  - Performance optimization
+  - Beta launch to 500 mechanics, 20 shops
+  - Gather metrics, iterate
+
+PHASE 2: INTELLIGENCE & NETWORK (Months 4-6)
+---------------------------------------------
+Goal: Make WHEELS indispensable through intelligence and community.
+
+Month 4:
+  - Culture Score Algorithm (NLP, radar charts, weighting)
+  - Voice-First Reviews (Whisper API, sentiment analysis, auto-structuring)
+  - Shop DNA profiles go live (auto-generated from review data)
+
+Month 5:
+  - SOS Network beta (tool lending, reputation system, gamification)
+  - AI Shop Inspector (multimodal AI, photo analysis, health reports)
+  - Predictive Turnover model v1 (basic sentiment + tenure analysis)
+
+Month 6:
+  - The Bench v1 (passive job mode, anonymized profiles, shop browsing)
+  - Tool Inventory OS v1 (receipt OCR, basic tracking, depreciation)
+  - Union API expansion (2 more locals or 1 national body)
+  - Public launch (PR push, trade magazine coverage, influencer mechanics)
+
+PHASE 3: MONETIZATION & MOAT (Months 7-9)
+------------------------------------------
+Goal: Turn trust into revenue. Build the moat.
+
+Month 7:
+  - B2B SaaS dashboard for shops (analytics, benchmarking, review management)
+  - Predictive Turnover Alerts (premium feature, $49/mo)
+  - Tool financing partnerships (Snap-on, Matco pilot)
+
+Month 8:
+  - The Bench monetization (shop subscription for access, mechanic premium tier)
+  - Shop Insurance pilot (liability/workers comp, data-driven underwriting)
+  - Reverse Auctions v1 (shops bid for mechanics)
+
+Month 9:
+  - Federated Learning salary models (privacy-preserving ML)
+  - AR Tool Visualization pilot (ARKit/ARCore, tool recognition)
+  - Union API national rollout (if pilot succeeded)
+
+PHASE 4: EXPANSION & DOMINATION (Months 10-12)
+-----------------------------------------------
+Goal: Scale horizontally and vertically.
+
+Month 10:
+  - Spatial computing shop tours (Apple Vision Pro / Meta Quest 3)
+  - Cross-border expansion (Canada, Mexico — similar trade structures)
+  - WHEELS Academy pilot (online certification prep)
+
+Month 11:
+  - Shop Acquisition arm (separate LLC, data-driven deal flow)
+  - IRL Tool Swap Meets (3 cities, $5 entry, community building)
+  - WHEELS Radio / Podcast Network (trade content, sponsorships)
+
+Month 12:
+  - Mechanic Dating (partner with Bumble/Tinder infrastructure)
+  - WHEELS Credit Card (co-branded, tool purchase rewards)
+  - Series A preparation (if bootstrapped) or profitability review
+
+CRITICAL PATH DEPENDENCIES
+---------------------------
+- Union API pilot MUST succeed in Phase 1 or Phase 3 monetization is at risk
+- Pay Transparency Layer MUST hit 500 stubs in 30 days or the core value 
+  proposition is unproven
+- Shop SaaS dashboard MUST have 10 paying shops by Month 7 or the B2B model 
+  is unproven
+- The Bench MUST have 1,000 mechanics by Month 9 or the passive job market 
+  concept is dead
+
+KILL CRITERIA (When to pivot or shut down)
+-------------------------------------------
+- <100 daily active users by Month 3
+- <10 paying shops by Month 6
+- <1,000 verified reviews by Month 6
+- Union API pilot fails to secure partnership by Month 6
+- Pay stub fraud rate >5% (indicates verification system is broken)

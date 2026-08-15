@@ -1,0 +1,90 @@
+================================================================================
+WHEELS STRATEGIC BRIEF — 05: TRUST & SAFETY
+How to build a platform that mechanics trust and shops respect.
+================================================================================
+
+THE FUNDAMENTAL TENSION
+------------------------
+Mechanics want to speak freely about bad shops. Shops want to defend 
+themselves against false claims. Both are valid. Both will kill your 
+platform if you get the balance wrong.
+
+ARCHITECTURE: TRI-STATE REVIEW SYSTEM
+--------------------------------------
+Every review has three verification states:
+
+1. ANONYMOUS (Green badge: "Community Voice")
+   - Anyone can post
+   - Lowest weight in algorithms
+   - No identity verification required
+   - Subject to community moderation (upvote/downvote)
+   - Why keep it: Some mechanics fear retaliation. Anonymous voices 
+     surface problems that verified voices won't.
+
+2. VERIFIED-EMPLOYEE (Orange badge: "Verified Pro")
+   - Proven current or former employee
+   - Highest weight in algorithms
+   - Verified via: pay stub, W-2, union membership, or employer confirmation
+   - Can be anonymous to the public but verified to the platform
+   - Why it matters: This is your gold standard. 1 verified review = 
+     10 anonymous reviews in trust value.
+
+3. VERIFIED-CUSTOMER (Blue badge: "Verified Customer")
+   - Proven service customer
+   - Medium weight in algorithms
+   - Verified via: receipt, appointment confirmation, or shop confirmation
+   - Why it matters: Customers see different things than employees. 
+     Both perspectives matter.
+
+ANTI-GAMING MEASURES
+---------------------
+
+1. REVIEW VELOCITY DETECTION
+   Flag shops that get 5+ reviews in 24 hours. Require manual review 
+   before publishing. Detects coordinated fake review campaigns.
+
+2. LINGUISTIC FINGERPRINTING
+   AI analysis of writing style. If 10 "different" reviews use the same 
+   phrases, sentence structure, and emoji patterns, flag as coordinated.
+
+3. EMPLOYER CONFIRMATION ESCROW
+   Reviews held 48 hours. Shop gets notification: "A verified employee 
+   review is pending. You may respond before publish." Shop can dispute 
+   facts (not opinions). Disputes go to human moderation.
+
+4. DEFAMATION INSURANCE (Optional)
+   Shops pay $19/mo for legal protection against demonstrably false 
+   reviews. If a review is proven false in court, insurance covers 
+   legal costs up to $10K. You partner with a legal tech firm (e.g., 
+   LegalZoom, Rocket Lawyer).
+
+5. MENTAL HEALTH FLAGGING
+   AI sentiment analysis detects burnout, depression, suicidal ideation 
+   in reviews. Auto-offer resources:
+     - 988 Suicide & Crisis Lifeline
+     - Union EAP programs
+     - Local mental health resources
+   
+   Do NOT sell this feature. Do NOT use this data for targeting. Just 
+   be human. Mechanics have one of the highest suicide rates of any 
+   trade. You have a responsibility.
+
+6. RETALIATION PROTECTION
+   If a mechanic leaves a negative review and is fired within 90 days, 
+   flag the shop for investigation. Offer the mechanic legal referral 
+   (whistleblower protections may apply). This is your trust moat.
+
+7. ZERO-KNOWLEDGE EMPLOYMENT VERIFICATION
+   Cryptographic proof that a mechanic worked at a shop without revealing 
+   identity, dates, or any other details. Shop verifies employment 
+   without seeing the mechanic's profile. Ultimate privacy. Ultimate 
+   trust. No employment database to hack.
+
+COMMUNITY MODERATION
+---------------------
+- Trusted mechanic reviewers (100+ helpful reviews) get moderation 
+  privileges (flag, not delete)
+- Shop owners can respond to reviews but cannot delete them
+- 3-strike system for fake reviews: warning → suspension → permanent ban
+- Public transparency report: monthly stats on reviews removed, 
+  accounts banned, appeals granted

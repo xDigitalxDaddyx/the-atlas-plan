@@ -1,0 +1,108 @@
+================================================================================
+WHEELS STRATEGIC BRIEF — 06: OFF-THE-WALL IDEAS
+The stuff that sounds crazy until it works.
+================================================================================
+
+1. SHOP REALITY TV
+   Live cameras in shops (opt-in only). Mechanics build followings. 
+   Viewers tip. Sponsorships from tool brands. Think Twitch for trades.
+   
+   Why it could work: There is a MASSIVE audience for shop content on 
+   YouTube (South Main Auto, Rainman Ray, etc.). WHEELS becomes the 
+   platform where mechanics become influencers. Shops get free marketing. 
+   You get engagement that no job board can match.
+   
+   Revenue: 20% of tips. Sponsored stream slots. Tool brand partnerships.
+
+2. TOOL SWAP MEETS (IRL Events)
+   Organize regional tool swap meets via the app. $5 entry fee. You take 
+   a cut. Mechanics sell old tools, buy new ones, network.
+   
+   Why it works: Tool trucks are expensive. eBay is a hassle. Facebook 
+   Marketplace is sketchy. A trusted, vetted marketplace for tools 
+   within the WHEELS community is sticky as hell.
+   
+   Scale: Start with 3 cities. Expand to 20. Eventually franchise the 
+   event model.
+
+3. MECHANIC DATING
+   They work weird hours (nights, weekends, holidays). They get each 
+   other. Niche, but sticky as hell.
+   
+   Why it could work: FarmersOnly.com exists. Christian Mingle exists. 
+   Tradespeople are an underserved demographic in dating. Partner 
+   with existing dating infrastructure (Bumble API, Tinder SDK). Don't 
+   build from scratch.
+   
+   Revenue: Premium subscriptions. In-app gifts (virtual tool-themed 
+   stickers, etc.).
+
+4. SHOP ACQUISITION ARM
+   Use your data to identify undervalued shops:
+     - High turnover (bad management, fixable)
+     - Low culture scores (bad culture, fixable)
+     - Undermarket pay (cheap labor, fixable with capital)
+     - Strong revenue but weak online presence
+   
+   Buy them. Fix them. Operate them. Profit.
+   
+   Why this is insane but brilliant: You have data no one else has. 
+   You know which shops are diamonds in the rough. You know what 
+   mechanics want. You know what shops are doing wrong. Use it.
+   
+   Structure: Separate LLC. WHEELS data feeds deal flow. You take 
+   equity. Mechanics from The Bench become the new management.
+
+5. WHEELS ACADEMY
+   Online certification prep for ASE, FAA, etc. Partner with existing 
+   course providers (Penn Foster, UTI). White-label their content. 
+   Add community study groups, practice exams, and job placement 
+   guarantees.
+   
+   Revenue: $199-499 per course. You take 30%. Job placement guarantee 
+   ("Pass the course, we get you a job within 30 days or your money 
+   back") drives conversion.
+
+6. MECHANIC HOUSING
+   Partner with apartment complexes near industrial zones. Mechanics 
+   get discounted rent. You get referral fees. Sounds random until 
+   you realize mechanics often live far from work because affordable 
+   housing near shops doesn't exist.
+   
+   Revenue: $200-500 per lease referral.
+
+7. THE WHEELS CREDIT CARD
+   Co-branded credit card for mechanics. 3% back on tool purchases. 
+   2% back on gas. 1% back on everything else. Partner with a bank 
+   (Chase, Capital One, or a credit union).
+   
+   Why it works: Mechanics spend $10K-50K+ on tools over a career. 
+   They drive a lot. A card tailored to their spending habits is 
+   genuinely useful.
+   
+   Revenue: Interchange fees (1-2% of spend). $500+ per active user 
+   annually.
+
+8. WHEELS RADIO / PODCAST NETWORK
+   Curated content for mechanics during their commute or while working.
+   Shop talk, industry news, tool reviews, career advice. Think 
+   "Joe Rogan for grease monkeys."
+   
+   Revenue: Sponsorships from tool brands, oil companies, parts 
+   distributors. $50-200 CPM because the audience is hyper-targeted.
+
+9. MECHANIC RELOCATION SERVICE
+   Shop in North Dakota needs a diesel tech. Mechanic in Florida wants 
+   to move. You handle the logistics: moving costs, temporary housing, 
+   job placement. Charge the shop a placement fee ($2,000-5,000).
+   
+   Why it works: Rural shops are desperate. Urban mechanics are 
+   underpaid. You bridge the gap.
+
+10. WHEELS TOOL TRUCK FRANCHISE
+    Buy a used Snap-on or Matco truck. Hire a driver. Route it based 
+    on WHEELS user density data. Sell tools at events. Build brand 
+    presence.
+    
+    Why it works: Tool trucks are mobile billboards. The driver becomes 
+    a WHEELS evangelist. Every stop is a user acquisition opportunity.

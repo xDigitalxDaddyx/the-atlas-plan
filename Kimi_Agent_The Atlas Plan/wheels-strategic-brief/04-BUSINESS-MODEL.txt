@@ -1,0 +1,91 @@
+================================================================================
+WHEELS STRATEGIC BRIEF — 04: BUSINESS MODEL INNOVATIONS
+How to actually make money without killing the community.
+================================================================================
+
+THE CORE PROBLEM WITH YOUR CURRENT MODEL
+-----------------------------------------
+Free for mechanics, paid for shops. This is a two-sided market with 
+one engine. You need mechanic density BEFORE shops will pay. But you 
+can't get mechanic density without shop listings. Classic chicken-and-egg.
+
+THE FIX: B2B FIRST, B2C AS ACQUISITION
+---------------------------------------
+Make the shop dashboard so valuable that shops pay $99/mo before a single 
+mechanic downloads the app. Then use consumer reviews and job postings 
+as the acquisition channel to bring mechanics in.
+
+REVENUE STREAMS
+----------------
+
+1. SHOP SAAS DASHBOARD (Primary revenue)
+   Tier 1: $99/mo — 1-5 bays
+     - Job posting (3 active)
+     - Basic analytics (views, applies, culture score)
+     - Review management (respond, flag, dispute)
+   
+   Tier 2: $199/mo — 6-15 bays
+     - Unlimited job postings
+     - Competitive benchmarking (salary vs. local market)
+     - Predictive turnover alerts
+     - The Bench access (browse passive candidates)
+   
+   Tier 3: $499/mo — 16+ bays / fleets
+     - White-glove onboarding
+     - Custom integrations (ADP, Paychex)
+     - API access
+     - Dedicated account manager
+
+2. MECHANIC PREMIUM (Secondary revenue)
+   Free tier: Job search, read reviews, basic profile
+   
+   Premium: $9.99/mo
+     - The Bench (passive job mode, highlighted profile)
+     - Tool Inventory OS (unlimited tools, depreciation tracking)
+     - Salary negotiation agent (AI-assisted)
+     - Priority support
+   
+   Why mechanics will pay: If The Bench gets them one job offer $2/hr 
+   higher, it pays for itself in a single day.
+
+3. TOOL FINANCING PARTNERSHIPS (Affiliate revenue)
+   Partner with Snap-on, Matco, Mac Tools, Cornwell. In-app financing 
+   for required tools. Revenue share on every financed tool.
+   
+   Example: Shop posts job requiring $3,000 in specialty tools. Mechanic 
+   sees gap, clicks "Finance through Snap-on," gets 0% for 12 months. 
+   You take 3-5% of the sale.
+   
+   Projected: $500K GMV Year 1, $5M GMV Year 3.
+
+4. SHOP INSURANCE (Data monetization)
+   Use review data and Shop DNA to offer tailored liability and workers 
+   comp insurance. Shops with high culture scores get lower premiums. 
+   You take a broker fee.
+   
+   Partner with: NEXT Insurance, Hiscox, or a trade-specific underwriter.
+
+5. REVERSE AUCTIONS (Transaction revenue)
+   Shops bid for mechanics, not the other way around. Mechanics set 
+   minimums. Shops compete. You take 5% of the first-year salary 
+   differential (only if the mechanic gets a raise through your platform).
+   
+   Ethical safeguard: Cap at $500 per placement. Mechanics keep 100% 
+   of their salary.
+
+6. UNION INTEGRATION (Institutional revenue)
+   Become the official app of IUEC, IAMAW, UAW, SMART. Dues-paying 
+   members get premium features free. Unions pay you a per-member fee 
+   ($1-2/mo) for white-label access.
+   
+   Math: 2.1M union mechanics x $1.50/mo = $3.15M/mo = $37.8M ARR.
+   This is the whale.
+
+WHAT NOT TO DO
+---------------
+- Don't put reviews behind a paywall. That's how you die.
+- Don't charge mechanics to apply for jobs. That's how you die faster.
+- Don't sell mechanic data to shops without explicit consent. That's 
+  how you get sued and lose the community forever.
+- Don't do display ads. It cheapens the platform. Sponsored job postings 
+  are fine if clearly labeled.

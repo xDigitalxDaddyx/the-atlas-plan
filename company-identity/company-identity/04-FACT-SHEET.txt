@@ -1,0 +1,49 @@
+================================================================================
+FACT SHEET — quick-reference answers for anyone doing diligence
+(moderators, partners, press, skeptical group members)
+================================================================================
+
+COMPANY:          Sawka Solutions LLC (formation in progress)
+PRODUCT:          Wheels — "It Has Wheels For A Reason"
+LIVE NOW:         Run The Numbers — The Mechanic's True Pay Calculator
+                  (free, no signup, no data harvesting)
+WEB:              sawkasolutions.help
+SUPPORT/TIPS:     ko-fi.com/sawkasolutions (0% platform fee on tips)
+
+WHO IT'S FOR:
+  Primary:   Working mechanics and technicians — every trade: automotive,
+             diesel/heavy equipment, aircraft (A&P), marine, motorcycle,
+             industrial, HVAC, small engine, railroad, ag, elevator.
+  Secondary: Shop owners, fleet managers, dealerships — the paying side.
+
+WHAT IT COSTS:
+  Mechanics: $0. Forever. Full stop.
+  Shops:     Free tier (claim profile, 1 job post, respond to reviews);
+             paid tiers for unlimited posts, analytics, featured placement.
+             No shop can pay to alter reviews. See THE TRANSPARENCY PROMISE.
+
+PRIVACY POSITION:
+  - Reviewers can be fully anonymous; verified status proves employment
+    without exposing identity.
+  - Pay stub uploads are blurred to the pay rate only; data is shown as
+    aggregates (percentiles), never individual records.
+  - No sale of user data. No display ads. Revenue comes from shops'
+    subscriptions and postings — disclosed publicly.
+
+THE NUMBERS BEHIND THE NEED (citable industry facts):
+  - 65.5% of diesel shops are understaffed; 19.3% average vacancy (ATRI 2025)
+  - 44% of trucking diesel techs are considering leaving for other trades
+  - 29% of diesel techs cite tool cost ($10K+) as the #1 barrier to entry
+  - An empty bay costs a shop $20,000–$25,000/month in lost revenue
+  - Replacing an A-level technician costs $50,000–$100,000
+  - 18 states + DC now require pay ranges in job postings — transparency
+    is where the law is already going; Wheels is where it's going first
+
+CURRENT STATUS:
+  Phase 1: Calculator live, community seeding via the diesel community.
+  Phase 2: Wheels app (job feed, reviews, shop profiles) in active build.
+  Phase 3: Shop dashboard and paid tiers switch on after mechanic-side
+           density is proven. Roadmap and kill criteria are defined in the
+           master plan (THE ATLAS).
+
+================================================================================

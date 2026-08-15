@@ -1,0 +1,107 @@
+================================================================================
+WHEELS STRATEGIC BRIEF — 01: THE DIAGNOSIS
+What is broken, missing, or dangerously assumed in the current build.
+================================================================================
+
+CRITICAL GAPS (Fix these or the product dies)
+----------------------------------------------
+
+1. THE TRUST PARADOX
+   Problem: Anonymous reviews + verified reviews in the same feed creates 
+   cognitive dissonance. Users won't know which weight to assign. Worse: shop 
+   owners will game the verified system by forcing employees to leave 5-stars.
+   
+   Fix: Tri-state trust architecture
+     - Anonymous (anyone can post, lowest weight)
+     - Verified-Employee (proven current/former employee, highest weight)
+     - Verified-Customer (proven service customer, medium weight)
+   
+   Why this matters: Glassdoor failed because anonymous reviews became noise.
+   You have a chance to do it right from day one.
+
+2. FREEMIUM DEATH SPIRAL
+   Problem: Free for mechanics, paid for shops. This only works if you have 
+   MASSIVE mechanic adoption first. Shops won't pay for a ghost town. You're 
+   building a two-sided market with one engine.
+   
+   Fix: B2B SaaS for shops FIRST. Make the shop dashboard so valuable 
+   (predictive turnover, culture benchmarking, competitive salary intel) that 
+   shops pay $99/mo before a single mechanic downloads the app. Consumer reviews 
+   become your acquisition channel, not your monetization engine.
+   
+   Revenue model pivot:
+     - Shops: $99-299/mo SaaS (tiered by bay count)
+     - Mechanics: Free forever (data is the product)
+     - Premium mechanic tier: $9.99/mo for "The Bench" passive job mode
+
+3. FIREBASE PHONE AUTH ONLY
+   Problem: Phone numbers change. Shops have landlines. Mechanics switch 
+   carriers. You need identity that persists beyond a SIM card.
+   
+   Fix: Move to Passkeys / WebAuthn. Biometric login. No SMS interception. 
+   True persistent identity. OR partner with trade unions for verifiable 
+   credential integration (IUEC, IAMAW, etc.).
+
+4. NO UNION INTEGRATION
+   Problem: 2.1 million US mechanics are union members. They have verified 
+   credentials, wage scales, training records. You are ignoring the most 
+   credential-rich segment of your market.
+   
+   Fix: Partner with one union local as a pilot. Read-only API access to 
+   member verification. Instant credibility. Instant trust. Instant moat.
+
+MEDIUM GAPS (Fix these to win)
+-------------------------------
+
+5. TRADE SILOS
+   Problem: Automotive, diesel, aircraft, marine, motorcycle, industrial, HVAC 
+   — these communities don't mingle. A diesel tech doesn't care about aircraft 
+   MRO culture. One feed dilutes relevance for everyone.
+   
+   Fix: Sub-reddit style trade channels. Default feed is user's primary trade 
+   only. Cross-pollination rewards: "See what's happening in Marine" card. 
+   Separate culture scores, salary benchmarks, and job feeds per trade.
+
+6. TOOL CALCULATOR ISOLATION
+   Problem: Buried on shop profiles as a nice-to-have. Doesn't compound. 
+   Doesn't connect to purchase history or depreciation. No one will use it 
+   twice.
+   
+   Fix: Upgrade to Tool Inventory OS
+     - Receipt OCR (Snap-on, Matco, Mac, Cornwell)
+     - Depreciation curves by brand and tool type
+     - Warranty expiration alerts
+     - Resale marketplace integration (eBay, Facebook Marketplace)
+     - Insurance valuation reports
+     - Required-tool gap analysis when viewing job postings
+
+7. GOOGLE MAPS IS A COMMODITY
+   Problem: Every app has maps. You need spatial intelligence, not just 
+   location pins.
+   
+   Fix: Layered map with
+     - Real-time tool truck locations (Snap-on, Matco routes)
+     - Union halls and meeting times
+     - Training centers and certification events
+     - Shop density heatmap (where are the jobs?)
+     - Salary heatmap by zip code
+
+LOW GAPS (Nice to have, not urgent)
+------------------------------------
+
+8. DARK THEME IS FINE BUT NOT DISTINCTIVE
+   Problem: Gray/black/orange is safe. Every "edgy" app looks like this now.
+   
+   Fix: Lean into the shop floor aesthetic harder. Grease stains as texture 
+   overlays. Warning label typography. OSHA color coding (yellow/black for 
+   alerts, red for critical). Make it feel like a Snap-on catalog, not a 
+   fintech app.
+
+9. NO MENTAL HEALTH AWARENESS
+   Problem: Mechanics have one of the highest suicide rates of any trade. 
+   Burnout is endemic. Your app will surface this in reviews. You have a 
+   responsibility.
+   
+   Fix: AI sentiment analysis flags burnout/depression language in reviews. 
+   Auto-offer resources (988 Suicide & Crisis Lifeline, union EAP programs). 
+   Do not sell this feature. Just be human.

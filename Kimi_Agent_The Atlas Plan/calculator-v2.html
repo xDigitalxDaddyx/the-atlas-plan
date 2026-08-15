@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Run The Numbers — The Mechanic's True Pay Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bp-blue:    #0b1a2e;
+    --bp-dark:    #081420;
+    --line:       #8fb8d6;
+    --line-dim:   #3a5a78;
+    --line-faint: #1e3450;
+    --cyan:       #5cc8f0;
+    --white:      #d8e8f4;
+    --amber:      #f0a840;
+    --red:        #e06050;
+    --green:      #50c878;
+    --grid:       rgba(140,185,215,0.04);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 15px; scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bp-dark);
+    color: var(--white);
+    min-height: 100vh;
+    -webkit-tap-highlight-color: transparent;
+    line-height: 1.5;
+    /* Blueprint grid */
+    background-image:
+      linear-gradient(rgba(140,185,215,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(140,185,215,0.04) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* Drawing border frame */
+  .drawing {
+    max-width: 860px; margin: 16px auto 0; padding: 24px 20px 80px;
+    position: relative;
+    border: 1px solid var(--line-dim);
+    min-height: 90vh;
+  }
+  /* Corner crop marks */
+  .drawing::before {
+    content: ''; position: absolute; top: -1px; left: -1px;
+    width: 16px; height: 16px;
+    border-top: 2px solid var(--line); border-left: 2px solid var(--line);
+  }
+  .drawing::after {
+    content: ''; position: absolute; top: -1px; right: -1px;
+    width: 16px; height: 16px;
+    border-top: 2px solid var(--line); border-right: 2px solid var(--line);
+  }
+  .crop-bl {
+    position: absolute; bottom: -1px; left: -1px;
+    width: 16px; height: 16px;
+    border-bottom: 2px solid var(--line); border-left: 2px solid var(--line);
+  }
+  .crop-br {
+    position: absolute; bottom: -1px; right: -1px;
+    width: 16px; height: 16px;
+    border-bottom: 2px solid var(--line); border-right: 2px solid var(--line);
+  }
+
+  /* ═══ TITLE BLOCK (bottom right) ═══ */
+  .title-block {
+    position: absolute; bottom: 20px; right: 20px;
+    border: 1px solid var(--line-dim); padding: 10px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.54rem; color: var(--line-dim);
+    line-height: 1.6; letter-spacing: 0.04em;
+    background: var(--bp-dark);
+    min-width: 180px;
+  }
+  .title-block strong {
+    display: block; color: var(--line); font-size: 0.62rem;
+    text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 4px;
+  }
+
+  /* ═══ HEADER ═══ */
+  header {
+    padding: 0 0 18px; margin-bottom: 24px;
+    position: sticky; top: 16px; z-index: 10;
+    background: rgba(11,26,46,0.94);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  .brand-row { display: flex; align-items: baseline; gap: 14px; }
+  header h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--line);
+  }
+  header h1 span {
+    display: block; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; font-weight: 400;
+    letter-spacing: 0.16em; color: var(--line-dim); margin-top: 2px;
+  }
+  .rev-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem; color: var(--cyan);
+    border: 1px solid var(--cyan); border-radius: 2px;
+    padding: 2px 8px; letter-spacing: 0.1em;
+  }
+
+  /* ═══ CENTERLINE DIVIDER ═══ */
+  .centerline {
+    display: flex; align-items: center; gap: 10px;
+    margin: 10px 0 8px; position: relative;
+  }
+  .centerline::before {
+    content: ''; flex: 1; height: 0;
+    border-top: 1px solid var(--line-dim);
+    border-bottom: 1px solid var(--line-dim);
+  }
+  .centerline .cl-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.52rem; color: var(--line-dim);
+    letter-spacing: 0.1em; white-space: nowrap;
+  }
+
+  /* ═══ JOB PANELS — as drawing detail boxes ═══ */
+  .job-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 540px) { .job-cols { grid-template-columns: 1fr; gap: 14px; } }
+
+  .job-col {
+    border: 1px solid var(--line-dim);
+    padding: 20px 16px 16px; position: relative;
+    background: rgba(11,26,46,0.5);
+  }
+  /* Detail callout circle */
+  .job-col::before {
+    content: ''; position: absolute; top: -7px; left: 14px;
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 1.5px solid var(--line);
+    background: var(--bp-blue);
+    z-index: 1;
+  }
+  .callout-label {
+    position: absolute; top: -7px; left: 34px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.56rem; font-weight: 700; color: var(--line);
+    letter-spacing: 0.1em; z-index: 1;
+    background: var(--bp-blue); padding: 0 4px;
+  }
+  .job-col-a .callout-label { color: var(--cyan); }
+  .job-col-b .callout-label { color: var(--amber); }
+
+  /* ═══ FIELD: line-drawing style ═══ */
+  .field { margin-bottom: 10px; }
+  .field label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem; font-weight: 500;
+    color: var(--line-dim); letter-spacing: 0.06em; margin-bottom: 3px;
+  }
+  .field select, .field input {
+    width: 100%; padding: 8px 10px;
+    background: transparent;
+    border: 1px solid var(--line-faint);
+    color: var(--white); font-size: 0.82rem;
+    font-family: 'JetBrains Mono', monospace;
+    transition: border-color 0.15s;
+    -webkit-appearance: none; appearance: none;
+    border-radius: 0;
+  }
+  .field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%233a5a78' d='M5 7L1 3h8z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 10px center; padding-right: 28px;
+  }
+  .field select option { background: var(--bp-dark); color: var(--white); }
+  .field input:focus, .field select:focus {
+    outline: none; border-color: var(--cyan);
+  }
+  .field input[type="number"] { -moz-appearance: textfield; }
+  .field input[type="number"]::-webkit-inner-spin-button,
+  .field input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  .field .hint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem; color: #1e3450; margin-top: 2px;
+  }
+  .field .unit { position: relative; }
+  .field .unit::after {
+    content: '$'; position: absolute; left: 9px; top: 50%;
+    transform: translateY(-50%); color: var(--line-dim);
+    font-weight: 500; pointer-events: none; font-size: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .field .unit input { padding-left: 20px; }
+
+  /* Conditional fields */
+  .conditional { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.22s ease, opacity 0.18s ease; opacity: 0; }
+  .conditional > div { overflow: hidden; }
+  .conditional-inner {
+    margin-top: 6px; padding: 10px 12px;
+    border: 1px dashed var(--line-faint);
+    background: rgba(4,10,20,0.4);
+  }
+  .conditional.visible { grid-template-rows: 1fr; opacity: 1; }
+
+  /* Toggle */
+  .toggle-row { display: flex; justify-content: space-between; align-items: center; padding: 2px 0; }
+  .toggle-row span {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.55rem; font-weight: 500; color: var(--line-dim); letter-spacing: 0.04em;
+  }
+  .toggle {
+    position: relative; width: 40px; height: 22px;
+    border: 1px solid var(--line-dim); cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    background: transparent;
+  }
+  .toggle.on { border-color: var(--cyan); background: rgba(92,200,240,0.08); }
+  .toggle::after {
+    content: ''; position: absolute;
+    width: 14px; height: 14px;
+    background: var(--line-dim); top: 3px; left: 3px;
+    transition: transform 0.2s cubic-bezier(0.34, 1.3, 0.64, 1), background 0.2s;
+  }
+  .toggle.on::after { transform: translateX(18px); background: var(--cyan); }
+
+  /* ═══ CALCULATE — approval stamp ═══ */
+  .calc-btn-wrap {
+    position: sticky; bottom: 0; z-index: 10;
+    padding: 16px 0 20px;
+    background: linear-gradient(0deg, var(--bp-blue) 60%, transparent);
+  }
+  .calc-btn {
+    display: block; width: 100%; padding: 14px 24px;
+    background: transparent;
+    border: 2px solid var(--cyan);
+    color: var(--cyan); border-radius: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.18em;
+    cursor: pointer; position: relative; overflow: hidden;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .calc-btn:hover { background: rgba(92,200,240,0.08); border-color: #80d8ff; color: #80d8ff; }
+  .calc-btn:active { transform: scale(0.99); }
+  .calc-btn .ripple {
+    position: absolute; border-radius: 50%;
+    background: rgba(92,200,240,0.2);
+    transform: scale(0); animation: ripple 0.5s ease-out; pointer-events: none;
+  }
+  @keyframes ripple { to { transform: scale(4); opacity: 0; } }
+
+  /* ═══ RESULTS ═══ */
+  #results {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  #results.visible { max-height: 4000px; }
+
+  /* Dimension line (delta indicator) */
+  .dimension-line {
+    display: flex; align-items: center; gap: 0;
+    margin: 14px 0 18px; height: 32px;
+    opacity: 0; transform: translateY(6px);
+    transition: opacity 0.4s, transform 0.4s;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .dimension-line.show { opacity: 1; transform: translateY(0); }
+  .dim-line { flex: 1; height: 0; border-top: 1px solid var(--line-dim); position: relative; }
+  .dim-line::before {
+    content: ''; position: absolute; right: -4px; top: -3px;
+    width: 0; height: 0;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-left: 6px solid var(--line-dim);
+  }
+  .dim-line-l { flex: 1; height: 0; border-top: 1px solid var(--line-dim); position: relative; }
+  .dim-line-l::after {
+    content: ''; position: absolute; left: -4px; top: -3px;
+    width: 0; height: 0;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-right: 6px solid var(--line-dim);
+  }
+  .dim-value {
+    padding: 0 12px; font-size: 0.68rem; font-weight: 700;
+    color: var(--white); letter-spacing: 0.04em; white-space: nowrap;
+  }
+
+  /* Result cards — detail view boxes */
+  .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+  @media (max-width: 540px) { .results-grid { grid-template-columns: 1fr; } }
+
+  .result-card {
+    border: 1px solid var(--line-dim); padding: 22px 14px 16px;
+    position: relative; text-align: center;
+    background: rgba(4,10,20,0.5);
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 0.4s 0.1s, transform 0.4s 0.1s;
+  }
+  .result-card.show { opacity: 1; transform: translateY(0); }
+  /* Detail callout on result cards */
+  .result-card::after {
+    content: ''; position: absolute; top: -7px; right: 14px;
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 1.5px solid var(--line);
+    background: var(--bp-blue);
+  }
+  .result-card .detail-num {
+    position: absolute; top: -7px; right: 34px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.52rem; color: var(--line); background: var(--bp-blue);
+    padding: 0 4px; letter-spacing: 0.06em;
+  }
+  .result-card .effective-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.54rem; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.14em; margin-bottom: 10px; color: var(--line-dim);
+  }
+  .result-card .effective-wage {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(2.2rem, 6vw, 2.8rem); font-weight: 700; line-height: 1;
+    letter-spacing: 0.02em;
+  }
+  .result-card .effective-wage.negative { color: var(--red); }
+  .result-card .effective-wage.neutral { color: var(--white); }
+  .result-card .effective-wage.positive { color: var(--green); }
+  .result-card .unit-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.5rem; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.18em; margin-top: 4px; color: var(--line-dim);
+  }
+  .result-card .true-income {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; color: var(--line-dim); margin-top: 12px;
+  }
+  .result-card .true-income.negative { color: var(--red); }
+  .result-card .breakdown {
+    margin-top: 12px; padding-top: 10px;
+    border-top: 1px solid rgba(140,185,215,0.08);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.56rem; color: #1e3a50; line-height: 2;
+    text-align: left; max-width: 220px;
+    margin-left: auto; margin-right: auto;
+  }
+  .result-card .breakdown span { color: var(--line-dim); float: right; }
+  .result-card.winner {
+    border-color: var(--green);
+  }
+
+  /* Chart */
+  .chart-wrap {
+    border: 1px solid var(--line-dim); padding: 20px 16px;
+    margin-bottom: 18px; position: relative;
+    background: rgba(4,10,20,0.5);
+  }
+  .chart-wrap h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.56rem; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.12em; margin-bottom: 14px; color: var(--line-dim);
+  }
+  .chart-wrap canvas { max-height: 240px; }
+
+  /* Verdict — as a note annotation */
+  .verdict {
+    border: 1px solid var(--line-dim); padding: 14px 18px;
+    margin-bottom: 16px; font-size: 0.86rem;
+    color: var(--white); line-height: 1.65;
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 0.4s 0.15s, transform 0.4s 0.15s;
+    position: relative;
+    background: rgba(4,10,20,0.5);
+  }
+  .verdict.show { opacity: 1; transform: translateY(0); }
+  .verdict em { color: var(--cyan); font-style: normal; font-weight: 600; }
+  .verdict::before {
+    content: 'NOTE:'; position: absolute; top: -8px; left: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem; color: var(--line-dim); letter-spacing: 0.1em;
+    background: var(--bp-blue); padding: 0 6px;
+  }
+
+  /* Button row */
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; padding-bottom: 10px; }
+  .btn-secondary {
+    flex: 1; min-width: 90px; padding: 10px 14px;
+    background: transparent; color: var(--line-dim);
+    border: 1px solid var(--line-faint);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.64rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--line); color: var(--line); }
+  .btn-secondary.primary {
+    border-color: var(--cyan); color: var(--cyan);
+  }
+  .btn-secondary.primary:hover { background: rgba(92,200,240,0.08); }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 28px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--bp-dark); border: 1px solid var(--cyan);
+    color: var(--cyan); padding: 10px 22px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em;
+    z-index: 200; transition: transform 0.3s cubic-bezier(0.34, 1.3, 0.64, 1);
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* Share overlay */
+  .share-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(4,10,20,0.96); z-index: 100;
+    justify-content: center; align-items: center; padding: 16px;
+  }
+  .share-overlay.visible { display: flex; }
+  .share-card {
+    border: 1px solid var(--cyan); padding: 28px 24px 20px;
+    max-width: 460px; width: 100%; text-align: center;
+    animation: cardUp 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    background: var(--bp-dark);
+  }
+  @keyframes cardUp {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .share-card h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.1em; margin-bottom: 18px; color: var(--line);
+  }
+  .share-card h2 b { color: var(--cyan); }
+  .share-row { display: flex; justify-content: center; gap: 30px; margin-bottom: 18px; flex-wrap: wrap; }
+  .share-val { text-align: center; }
+  .share-val .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.6rem; font-weight: 700; color: var(--green);
+  }
+  .share-val .lbl {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.52rem; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--line-dim);
+  }
+  .share-verdict {
+    font-size: 0.82rem; color: var(--white); margin-bottom: 18px;
+    padding: 12px; border: 1px solid var(--line-faint); line-height: 1.5;
+  }
+  .btn-close, .btn-copy {
+    padding: 9px 20px; font-weight: 600; cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .btn-close { background: transparent; border: 1px solid var(--line-dim); color: var(--line-dim); }
+  .btn-close:hover { border-color: var(--line); color: var(--line); }
+  .btn-copy { background: transparent; border: 1px solid var(--cyan); color: var(--cyan); margin-left: 8px; }
+  .btn-copy:hover { background: rgba(92,200,240,0.08); }
+
+  footer {
+    text-align: center; padding: 6px 0 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem; color: var(--line-faint); letter-spacing: 0.08em;
+  }
+  footer span { color: var(--line-dim); }
+</style>
+</head>
+<body>
+
+<div class="drawing">
+  <span class="crop-bl"></span><span class="crop-br"></span>
+
+  <!-- Title Block -->
+  <div class="title-block">
+    <strong>Job Comparison</strong>
+    SCALE: &nbsp;NTS<br>
+    DATE: &nbsp;<span id="titleDate"></span><br>
+    REV: &nbsp;&nbsp;&nbsp;A<br>
+    SHEET 1 OF 1
+  </div>
+
+  <div class="container">
+    <header>
+      <div class="brand-row">
+        <span class="rev-badge">REV A</span>
+        <h1>Run The Numbers <span>Job Pay Comparison · Engineering Analysis</span></h1>
+      </div>
+    </header>
+
+    <div class="centerline">
+      <span class="cl-text">INPUT DATA</span>
+    </div>
+
+    <div class="job-cols">
+      <!-- ═══ JOB A ═══ -->
+      <div class="job-col job-col-a">
+        <span class="callout-label">DETAIL A</span>
+        <div class="field">
+          <label>Pay Structure</label>
+          <select id="payTypeA" onchange="toggleFields('A')">
+            <option value="flat-rate">Flat Rate</option>
+            <option value="hourly">Hourly</option>
+            <option value="salary">Salary</option>
+          </select>
+        </div>
+        <div class="field unit">
+          <label id="rateLabelA">Rate ($/hr)</label>
+          <input type="number" id="rateA" value="32" min="0" step="0.01" placeholder="0.00">
+        </div>
+        <div class="conditional" id="flatFieldsA"><div>
+          <div class="conditional-inner">
+            <div class="field"><label>Avg Flagged Hrs/Wk (normal)</label><input type="number" id="flaggedHrsA" value="40" min="1" step="0.5" placeholder="40"></div>
+            <div class="field"><label>Slow Weeks Per Year</label><input type="number" id="slowWeeksA" value="0" min="0" max="52" step="1" placeholder="0"></div>
+            <div class="field"><label>Flagged Hrs/Wk (slow weeks)</label><input type="number" id="slowHrsA" value="25" min="1" step="0.5" placeholder="25"></div>
+          </div>
+        </div></div>
+        <div class="conditional" id="overtimeToggleA"><div>
+          <div class="conditional-inner">
+            <div class="toggle-row"><span>Overtime (1.5× over 40 hrs)</span><div class="toggle" id="otToggleA" onclick="toggleOT('A')"></div></div>
+          </div>
+        </div></div>
+        <div class="field"><label>Physical Hrs at Shop / Week</label><input type="number" id="physicalHrsA" value="40" min="1" step="0.5" placeholder="40"><div class="hint">Hours you're actually at the shop</div></div>
+        <div class="field unit"><label>Health Insurance ($/mo out of pocket)</label><input type="number" id="insuranceA" value="0" min="0" step="0.01" placeholder="0.00"></div>
+        <div class="field"><label>401k Match (% of gross)</label><input type="number" id="match401kA" value="0" min="0" max="100" step="0.01" placeholder="0"><div class="hint">Employer match captured in full</div></div>
+        <div class="field"><label>Paid Days Off / Year</label><input type="number" id="ptoA" value="0" min="0" max="365" step="1" placeholder="0"></div>
+        <div class="field unit"><label>Tool Allowance ($/yr from employer)</label><input type="number" id="toolAllowanceA" value="0" min="0" step="0.01" placeholder="0.00"></div>
+        <div class="field unit"><label>Annual Tool Costs ($/yr)</label><input type="number" id="toolCostsA" value="0" min="0" step="0.01" placeholder="0.00"><div class="hint">Tool-truck payments + new purchases</div></div>
+        <div class="field"><label>Commute: Round-Trip Miles / Day</label><input type="number" id="commuteA" value="0" min="0" step="0.1" placeholder="0"><div class="hint">Cost = miles × $0.70 × working days</div></div>
+      </div>
+
+      <!-- ═══ JOB B ═══ -->
+      <div class="job-col job-col-b">
+        <span class="callout-label">DETAIL B</span>
+        <div class="field">
+          <label>Pay Structure</label>
+          <select id="payTypeB" onchange="toggleFields('B')">
+            <option value="flat-rate">Flat Rate</option>
+            <option value="hourly" selected>Hourly</option>
+            <option value="salary">Salary</option>
+          </select>
+        </div>
+        <div class="field unit">
+          <label id="rateLabelB">Rate ($/hr)</label>
+          <input type="number" id="rateB" value="35" min="0" step="0.01" placeholder="0.00">
+        </div>
+        <div class="conditional" id="flatFieldsB"><div>
+          <div class="conditional-inner">
+            <div class="field"><label>Avg Flagged Hrs/Wk (normal)</label><input type="number" id="flaggedHrsB" value="40" min="1" step="0.5" placeholder="40"></div>
+            <div class="field"><label>Slow Weeks Per Year</label><input type="number" id="slowWeeksB" value="0" min="0" max="52" step="1" placeholder="0"></div>
+            <div class="field"><label>Flagged Hrs/Wk (slow weeks)</label><input type="number" id="slowHrsB" value="25" min="1" step="0.5" placeholder="25"></div>
+          </div>
+        </div></div>
+        <div class="conditional" id="overtimeToggleB"><div>
+          <div class="conditional-inner">
+            <div class="toggle-row"><span>Overtime (1.5× over 40 hrs)</span><div class="toggle on" id="otToggleB" onclick="toggleOT('B')"></div></div>
+          </div>
+        </div></div>
+        <div class="field"><label>Physical Hrs at Shop / Week</label><input type="number" id="physicalHrsB" value="40" min="1" step="0.5" placeholder="40"><div class="hint">Hours you're actually at the shop</div></div>
+        <div class="field unit"><label>Health Insurance ($/mo out of pocket)</label><input type="number" id="insuranceB" value="0" min="0" step="0.01" placeholder="0.00"></div>
+        <div class="field"><label>401k Match (% of gross)</label><input type="number" id="match401kB" value="0" min="0" max="100" step="0.01" placeholder="0"><div class="hint">Employer match captured in full</div></div>
+        <div class="field"><label>Paid Days Off / Year</label><input type="number" id="ptoB" value="0" min="0" max="365" step="1" placeholder="0"></div>
+        <div class="field unit"><label>Tool Allowance ($/yr from employer)</label><input type="number" id="toolAllowanceB" value="0" min="0" step="0.01" placeholder="0.00"></div>
+        <div class="field unit"><label>Annual Tool Costs ($/yr)</label><input type="number" id="toolCostsB" value="0" min="0" step="0.01" placeholder="0.00"><div class="hint">Tool-truck payments + new purchases</div></div>
+        <div class="field"><label>Commute: Round-Trip Miles / Day</label><input type="number" id="commuteB" value="0" min="0" step="0.1" placeholder="0"><div class="hint">Cost = miles × $0.70 × working days</div></div>
+      </div>
+    </div>
+
+    <div class="calc-btn-wrap">
+      <button class="calc-btn" id="calcBtn" onclick="calculate(true)">▸ Run Analysis</button>
+    </div>
+
+    <div class="centerline">
+      <span class="cl-text">RESULTS</span>
+    </div>
+
+    <div id="results">
+      <!-- Dimension line for delta -->
+      <div class="dimension-line" id="dimLine">
+        <div class="dim-line-l"></div>
+        <div class="dim-value" id="dimValue"></div>
+        <div class="dim-line"></div>
+      </div>
+
+      <div class="results-grid">
+        <div class="result-card" id="resultCardA"></div>
+        <div class="result-card" id="resultCardB"></div>
+      </div>
+
+      <div class="chart-wrap">
+        <h3>Section C-C · Income Breakdown</h3>
+        <canvas id="breakdownChart"></canvas>
+      </div>
+
+      <div class="verdict" id="verdict"></div>
+
+      <div class="btn-row">
+        <button class="btn-secondary" onclick="saveToLocal()">Save</button>
+        <button class="btn-secondary" onclick="loadFromLocal()">Load</button>
+        <button class="btn-secondary primary" onclick="showShare()">Share</button>
+      </div>
+    </div>
+
+    <footer>Drawn by calculator tool &middot; <span>#RunTheNumbers</span></footer>
+  </div>
+</div>
+
+<div class="share-overlay" id="shareOverlay" onclick="if(event.target===this)hideShare()">
+  <div class="share-card" id="shareCapture">
+    <h2>Run The <b>Numbers</b></h2>
+    <div class="share-row" id="shareWages"></div>
+    <div class="share-verdict" id="shareVerdict"></div>
+    <button class="btn-close" onclick="hideShare()">Close</button>
+    <button class="btn-copy" onclick="copyShare()">Copy Link</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════ IDENTICAL JS LOGIC ═══════════ */
+
+const state = { overTimeA: false, overTimeB: true, lastCalc: null };
+let chartInstance = null;
+let toastTimer = null;
+
+document.getElementById('titleDate').textContent = new Date().toISOString().slice(0,10);
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+}
+
+function toggleFields(which) {
+  const type = document.getElementById('payType' + which).value;
+  document.getElementById('flatFields' + which).classList.toggle('visible', type === 'flat-rate');
+  document.getElementById('overtimeToggle' + which).classList.toggle('visible', type === 'hourly');
+  document.getElementById('rateLabel' + which).textContent = type === 'salary' ? 'Salary ($/yr)' : 'Rate ($/hr)';
+}
+
+function toggleOT(which) {
+  state['overTime' + which] = !state['overTime' + which];
+  document.getElementById('otToggle' + which).classList.toggle('on', state['overTime' + which]);
+}
+
+function gv(id) { const v = parseFloat(document.getElementById(id).value); return isNaN(v) ? 0 : v; }
+function fmtCurrency(n) {
+  const s = Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return (n < 0 ? '-$' : '$') + s;
+}
+
+function computeJob(which) {
+  const type = document.getElementById('payType' + which).value;
+  const rate = gv('rate' + which);
+  const physicalHrs = gv('physicalHrs' + which);
+  const insurance = gv('insurance' + which);
+  const match401k = gv('match401k' + which) / 100;
+  const ptoDays = gv('pto' + which);
+  const toolAllowance = gv('toolAllowance' + which);
+  const toolCosts = gv('toolCosts' + which);
+  const commute = gv('commute' + which);
+  const workingWeeks = Math.max(1, Math.round(52 - (ptoDays / 5)));
+  const workingDays = workingWeeks * 5;
+  let gross = 0;
+  if (type === 'salary') { gross = rate; }
+  else if (type === 'hourly') {
+    if (state['overTime' + which] && physicalHrs > 40)
+      gross = (rate * 40 * workingWeeks) + (rate * 1.5 * (physicalHrs - 40) * workingWeeks);
+    else gross = rate * physicalHrs * workingWeeks;
+  } else if (type === 'flat-rate') {
+    const flaggedHrs = gv('flaggedHrs' + which);
+    const slowWeeks = Math.min(workingWeeks, gv('slowWeeks' + which));
+    const slowHrs = gv('slowHrs' + which);
+    gross = rate * ((flaggedHrs * (workingWeeks - slowWeeks)) + (slowHrs * slowWeeks));
+  }
+  const commuteCost = commute * 0.70 * workingDays;
+  const matchValue = match401k * gross;
+  const trueIncome = gross - (12 * insurance) - toolCosts + toolAllowance - commuteCost + matchValue;
+  const totalPhysicalHrs = physicalHrs * workingWeeks;
+  return {
+    type, rate, physicalHrs, insurance, match401k: match401k * 100, ptoDays,
+    toolAllowance, toolCosts, commute, workingWeeks, workingDays,
+    gross, commuteCost, matchValue, trueIncome, totalPhysicalHrs,
+    effectiveWage: trueIncome / totalPhysicalHrs,
+    flaggedHrs: gv('flaggedHrs' + which),
+    slowWeeks: Math.min(workingWeeks, gv('slowWeeks' + which)),
+    slowHrs: gv('slowHrs' + which),
+    useOT: state['overTime' + which]
+  };
+}
+
+function calculate(scrollToResults) {
+  const jobA = computeJob('A'), jobB = computeJob('B');
+  state.lastCalc = { jobA, jobB };
+  const deltaIncome = jobB.trueIncome - jobA.trueIncome;
+  const deltaWage = jobB.effectiveWage - jobA.effectiveWage;
+  let winnerSide = Math.abs(deltaIncome) < 0.01 ? 'tie' : (deltaIncome > 0 ? 'b' : 'a');
+
+  document.getElementById('results').classList.add('visible');
+  autoSave();
+
+  // Dimension line
+  const dimLine = document.getElementById('dimLine');
+  const dimVal = document.getElementById('dimValue');
+  const absDelta = Math.abs(deltaIncome);
+  dimLine.className = 'dimension-line show';
+  if (winnerSide === 'tie') {
+    dimVal.innerHTML = '&Delta; = $0.00';
+    dimVal.style.color = 'var(--line-dim)';
+  } else if (winnerSide === 'b') {
+    dimVal.innerHTML = '&Delta; = ' + fmtCurrency(absDelta);
+    dimVal.style.color = 'var(--green)';
+  } else {
+    dimVal.innerHTML = '&Delta; = ' + fmtCurrency(absDelta);
+    dimVal.style.color = 'var(--amber)';
+  }
+
+  renderResultCard('A', jobA, winnerSide === 'a');
+  renderResultCard('B', jobB, winnerSide === 'b');
+  setTimeout(() => {
+    document.getElementById('resultCardA').classList.add('show');
+    document.getElementById('resultCardB').classList.add('show');
+  }, 50);
+
+  renderChart(jobA, jobB);
+  renderVerdict(jobA, jobB, deltaIncome, deltaWage, winnerSide);
+  setTimeout(() => document.getElementById('verdict').classList.add('show'), 100);
+
+  if (scrollToResults)
+    setTimeout(() => document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+
+  return { jobA, jobB, deltaIncome, deltaWage, winnerSide };
+}
+
+function renderResultCard(which, job, isWinner) {
+  const card = document.getElementById('resultCard' + which);
+  card.className = 'result-card' + (isWinner ? ' winner' : '');
+  card.classList.add('show');
+  const wc = job.effectiveWage < 0 ? 'negative' : (job.effectiveWage > 0 ? 'positive' : 'neutral');
+  const ic = job.trueIncome < 0 ? 'negative' : '';
+  card.innerHTML =
+    '<span class="detail-num">DETAIL ' + (which === 'A' ? 'A' : 'B') + '</span>' +
+    '<div class="effective-label">Effective Hourly Wage</div>' +
+    '<div class="effective-wage ' + wc + '">' + fmtCurrency(job.effectiveWage) + '</div>' +
+    '<div class="unit-label">$/HR Effective</div>' +
+    '<div class="true-income ' + ic + '">True take-home: ' + fmtCurrency(job.trueIncome) + '/yr</div>' +
+    '<div class="breakdown">' +
+      'Gross<span>' + fmtCurrency(job.gross) + '</span><br>' +
+      '&minus; Insurance<span>' + fmtCurrency(12 * job.insurance) + '</span><br>' +
+      '&minus; Tools<span>' + fmtCurrency(job.toolCosts) + '</span><br>' +
+      '+ Allowance<span>' + fmtCurrency(job.toolAllowance) + '</span><br>' +
+      '&minus; Commute<span>' + fmtCurrency(job.commuteCost) + '</span><br>' +
+      '+ 401k match<span>' + fmtCurrency(job.matchValue) + '</span>' +
+    '</div>';
+}
+
+function renderChart(jobA, jobB) {
+  if (chartInstance) chartInstance.destroy();
+  const ctx = document.getElementById('breakdownChart').getContext('2d');
+  const sA = jobA.gross - (12*jobA.insurance + jobA.toolCosts - jobA.toolAllowance + jobA.commuteCost - jobA.matchValue);
+  const sB = jobB.gross - (12*jobB.insurance + jobB.toolCosts - jobB.toolAllowance + jobB.commuteCost - jobB.matchValue);
+  chartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Job A', 'Job B'],
+      datasets: [
+        { label: 'Deductions', data: [jobA.gross - sA, jobB.gross - sB], backgroundColor: 'rgba(224,96,80,0.25)', borderColor: 'rgba(224,96,80,0.4)', borderWidth: 1, borderRadius: 0, borderSkipped: false, order: 1 },
+        { label: 'Take-Home', data: [sA, sB], backgroundColor: [sA >= 0 ? 'rgba(80,200,120,0.45)' : 'rgba(224,96,80,0.45)', sB >= 0 ? 'rgba(80,200,120,0.45)' : 'rgba(224,96,80,0.45)'], borderColor: [sA >= 0 ? '#50c878' : '#e06050', sB >= 0 ? '#50c878' : '#e06050'], borderWidth: 1, borderRadius: 0, borderSkipped: false, order: 2 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true, animation: { duration: 450, easing: 'easeOutCubic' },
+      plugins: {
+        legend: { position: 'bottom', labels: { color: '#3a5a78', font: { size: 11, family: 'Inter, sans-serif' }, padding: 18, usePointStyle: true, pointStyleWidth: 8 } },
+        tooltip: { callbacks: { label: function(c) { return c.dataset.label + ': ' + fmtCurrency(c.raw); } } }
+      },
+      scales: {
+        x: { stacked: true, ticks: { color: '#3a5a78', font: { size: 12, family: 'Inter, sans-serif' } }, grid: { display: false } },
+        y: { stacked: true, ticks: { color: '#1e3450', font: { size: 10, family: 'JetBrains Mono, monospace' }, callback: function(v) { return v >= 1000 ? '$' + (v/1000).toFixed(0) + 'k' : '$' + v; } }, grid: { color: 'rgba(58,90,120,0.2)' } }
+      }
+    }
+  });
+}
+
+function renderVerdict(jobA, jobB, deltaIncome, deltaWage, winnerSide) {
+  const el = document.getElementById('verdict'); el.classList.remove('show');
+  const aType = jobA.type === 'flat-rate' ? 'flat rate' : jobA.type;
+  const bType = jobB.type === 'flat-rate' ? 'flat rate' : jobB.type;
+  const aRate = jobA.type === 'salary' ? fmtCurrency(jobA.rate) + '/yr' : fmtCurrency(jobA.rate) + '/hr';
+  const bRate = jobB.type === 'salary' ? fmtCurrency(jobB.rate) + '/yr' : fmtCurrency(jobB.rate) + '/hr';
+  let v = '';
+  if (winnerSide === 'tie') {
+    v = 'These two jobs net out the same. ';
+    v += Math.abs(jobA.gross - jobB.gross) > 0.01
+      ? (jobA.gross > jobB.gross ? 'Job A has the bigger headline number, but deductions eat the difference. <em>Don\'t let the gross fool you.</em>' : 'Job B has the bigger headline number, but deductions eat the difference. <em>Don\'t let the gross fool you.</em>')
+      : 'When all costs are accounted for, it\'s a wash. Pick based on culture, commute, and growth.';
+  } else if (winnerSide === 'b') {
+    v = 'Job B puts an <em>extra ' + fmtCurrency(deltaIncome) + '/yr</em> in your pocket &mdash; ' + fmtCurrency(Math.abs(deltaWage)) + '/hr more. On paper, Job B pays ' + bRate + ' (' + bType + ') vs Job A\'s ' + aRate + ' (' + aType + '). ';
+    if (jobB.gross < jobA.gross && deltaIncome > 0) v += 'Even though Job A has a fatter headline number, Job B wins because of lower hidden costs. <em>Gross pay is a liar.</em>';
+    else if (jobA.toolCosts > 0 && jobB.toolCosts === 0) v += 'The tool-truck payment on Job A is eating your raise. <em>Factor in the Snap-on man before you sign.</em>';
+    else if (jobB.commuteCost < jobA.commuteCost && Math.abs(jobB.commuteCost - jobA.commuteCost) > 500) v += 'The shorter commute on Job B adds up. <em>Miles cost more than you think.</em>';
+    else v += 'The numbers don\'t lie &mdash; Job B is the better deal on paper. But trust your gut on shop culture too.';
+  } else {
+    v = 'Job A puts an <em>extra ' + fmtCurrency(Math.abs(deltaIncome)) + '/yr</em> in your pocket &mdash; ' + fmtCurrency(Math.abs(deltaWage)) + '/hr more. On paper, Job A pays ' + aRate + ' (' + aType + ') vs Job B\'s ' + bRate + ' (' + bType + '). ';
+    if (jobA.gross < jobB.gross && deltaIncome < 0) v += 'Even though Job B has a fatter headline number, Job A wins because of lower hidden costs. <em>Gross pay is a liar.</em>';
+    else if (jobB.toolCosts > 0 && jobA.toolCosts === 0) v += 'The tool-truck payment on Job B is eating the raise. <em>Don\'t forget the Snap-on man.</em>';
+    else if (jobA.commuteCost < jobB.commuteCost && Math.abs(jobA.commuteCost - jobB.commuteCost) > 500) v += 'The shorter commute on Job A adds up. <em>Miles cost more than you think.</em>';
+    else v += 'The numbers don\'t lie &mdash; Job A is the better deal on paper. But trust your gut on shop culture too.';
+  }
+  if (jobA.type === 'flat-rate' && jobA.slowWeeks > 10) v += ' <em>Heads up:</em> Job A has ' + jobA.slowWeeks + ' slow weeks at only ' + jobA.slowHrs + ' flagged hours &mdash; nearly ' + Math.round(jobA.slowWeeks/4) + ' months of thin paychecks.';
+  if (jobB.type === 'flat-rate' && jobB.slowWeeks > 10) v += ' <em>Heads up:</em> Job B has ' + jobB.slowWeeks + ' slow weeks at only ' + jobB.slowHrs + ' flagged hours &mdash; nearly ' + Math.round(jobB.slowWeeks/4) + ' months of thin paychecks.';
+  if (jobA.physicalHrs > 50) v += ' Job A has you at the shop <em>' + jobA.physicalHrs + ' hrs/wk</em> &mdash; your effective wage accounts for every one of those hours.';
+  if (jobB.physicalHrs > 50) v += ' Job B has you at the shop <em>' + jobB.physicalHrs + ' hrs/wk</em> &mdash; your effective wage accounts for every one of those hours.';
+  el.innerHTML = v;
+}
+
+function showShare() {
+  const d = state.lastCalc || calculate(false);
+  document.getElementById('shareWages').innerHTML =
+    '<div class="share-val"><div class="lbl">Job A &middot; Effective</div><div class="num">' + fmtCurrency(d.jobA.effectiveWage) + '/hr</div></div>' +
+    '<div class="share-val"><div class="lbl">Job B &middot; Effective</div><div class="num">' + fmtCurrency(d.jobB.effectiveWage) + '/hr</div></div>';
+  document.getElementById('shareVerdict').innerHTML = d.winnerSide === 'tie'
+    ? 'Dead even. Both jobs net the same.' : d.winnerSide === 'b'
+    ? 'Job B wins by ' + fmtCurrency(d.deltaIncome) + '/yr &mdash; ' + fmtCurrency(Math.abs(d.deltaWage)) + '/hr more.'
+    : 'Job A wins by ' + fmtCurrency(Math.abs(d.deltaIncome)) + '/yr &mdash; ' + fmtCurrency(Math.abs(d.deltaWage)) + '/hr more.';
+  document.getElementById('shareOverlay').classList.add('visible');
+}
+function hideShare() { document.getElementById('shareOverlay').classList.remove('visible'); }
+function copyShare() {
+  const t = (document.getElementById('shareVerdict').textContent + ' | ' + document.getElementById('shareWages').textContent).replace(/\s+/g, ' ').trim();
+  navigator.clipboard.writeText(t).then(() => toast('Copied'), () => toast('Could not copy'));
+}
+
+function getFormData() {
+  const d = {};
+  ['rate','flaggedHrs','slowWeeks','slowHrs','physicalHrs','insurance','match401k','pto','toolAllowance','toolCosts','commute'].forEach(f => { d[f+'A'] = document.getElementById(f+'A').value; d[f+'B'] = document.getElementById(f+'B').value; });
+  d.payTypeA = document.getElementById('payTypeA').value; d.payTypeB = document.getElementById('payTypeB').value;
+  d.overTimeA = state.overTimeA; d.overTimeB = state.overTimeB;
+  return d;
+}
+function setFormData(d) {
+  ['rate','flaggedHrs','slowWeeks','slowHrs','physicalHrs','insurance','match401k','pto','toolAllowance','toolCosts','commute'].forEach(f => { if (d[f+'A'] !== undefined) document.getElementById(f+'A').value = d[f+'A']; if (d[f+'B'] !== undefined) document.getElementById(f+'B').value = d[f+'B']; });
+  if (d.payTypeA) document.getElementById('payTypeA').value = d.payTypeA;
+  if (d.payTypeB) document.getElementById('payTypeB').value = d.payTypeB;
+  if (d.overTimeA !== undefined) { state.overTimeA = d.overTimeA; document.getElementById('otToggleA').classList.toggle('on', state.overTimeA); }
+  if (d.overTimeB !== undefined) { state.overTimeB = d.overTimeB; document.getElementById('otToggleB').classList.toggle('on', state.overTimeB); }
+  toggleFields('A'); toggleFields('B');
+}
+function autoSave() { try { localStorage.setItem('mechanic-calculator-v2', JSON.stringify(getFormData())); } catch(e) {} }
+function saveToLocal() { try { localStorage.setItem('mechanic-calculator-v2', JSON.stringify(getFormData())); toast('Saved'); } catch(e) { toast('Could not save'); } }
+function loadFromLocal() {
+  try {
+    const r = localStorage.getItem('mechanic-calculator-v2'); if (!r) { toast('No saved data found'); return; }
+    setFormData(JSON.parse(r)); toast('Loaded'); calculate(true);
+  } catch(e) { toast('Could not load saved data'); }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('calcBtn').addEventListener('click', function(e) {
+    const rect = this.getBoundingClientRect();
+    const ripple = document.createElement('span'); ripple.className = 'ripple';
+    const s = Math.max(rect.width, rect.height);
+    ripple.style.width = ripple.style.height = s + 'px';
+    ripple.style.left = (e.clientX - rect.left - s/2) + 'px';
+    ripple.style.top = (e.clientY - rect.top - s/2) + 'px';
+    this.appendChild(ripple);
+    ripple.addEventListener('animationend', () => ripple.remove());
+  });
+});
+
+toggleFields('A'); toggleFields('B');
+</script>
+
+</body>
+</html>

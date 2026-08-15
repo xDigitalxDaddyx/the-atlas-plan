@@ -1,0 +1,632 @@
+================================================================================
+                              T H E   A T L A S
+                 WHEELS — MASTER CONSOLIDATED PLAN (v1.0)
+        Company: It Has Wheels For A Reason — App: Wheels
+        Date: August 2026 — Status: SINGLE SOURCE OF TRUTH
+================================================================================
+
+WHAT THIS DOCUMENT IS
+---------------------
+This is the consolidated master plan for the Wheels platform, merging three
+prior bodies of work into ONE coherent strategy and ONE build order:
+
+  SOURCE A — INNOVATION BRAINSTORM (WHEELS_STRATEGIC_BRIEF, 10 sections):
+  diagnosis of critical gaps, feature innovations, tech breakthroughs,
+  business model, trust & safety architecture, priority matrix, 12-month
+  roadmap, strategic philosophy.
+
+  SOURCE B — MECHANIC APP PROMOTION (Wheels_Marketing_and_Profit_Plan):
+  voice-of-customer research from real mechanic communities, positioning,
+  launch plan, pricing, messaging rules, 90-day metrics, risk register.
+
+  SOURCE C — DELIVERABLE APP BUILD (00-09 build spec files +
+  calculator_prompt): tech stack, PostgreSQL schema, API spec, React Native
+  frontend spec, branding/voice guide, monetization tiers, step-by-step
+  build prompts, and the standalone True Pay Calculator spec.
+
+HOW TO USE THIS DOCUMENT (FOR A COMPOSER / ORCHESTRATING MODEL)
+---------------------------------------------------------------
+This plan is written to be carved up and distributed to coding agents and
+tools. Section 6 (WORKSTREAMS) is the distribution manifest: each workstream
+is a discrete task package with dependencies, inputs, and acceptance
+criteria. Everything before Section 6 is CONTEXT — feed it to every agent
+so no decision gets re-litigated. Everything after Section 6 is GOVERNANCE —
+use it to accept or reject work.
+
+Sections 1-5 = decisions already made. Do not reopen them.
+Section 6     = the work. Distribute it.
+Sections 7-10 = the rules of the game. Enforce them.
+
+
+================================================================================
+SECTION 1 — THE PRODUCT IN ONE PARAGRAPH
+================================================================================
+Wheels is a transparent job platform and shop review app for ALL mechanic
+trades (automotive, diesel/heavy, aircraft/A&P, marine, motorcycle, bicycle,
+industrial, HVAC, small engine, railroad, ag equipment, elevator). Mechanics
+get real pay data, verified shop reviews, culture scores, and a True Pay
+Calculator — free forever. Shops pay for job postings, featured placement,
+and analytics. The wedge into the market is a standalone, free, shareable
+True Pay Calculator ("Run The Numbers") seeded into the diesel community,
+starting with the founder's own multi-year home community: the Facebook
+group DIESEL KNUCKLEBUSTERS.
+
+Tagline: "Know what you're walking into before you walk out."
+Secondary: "It's got wheels for a reason."
+
+THE REAL PRODUCT (from the brainstorm, still true):
+You are not building a job board. You are building LEVERAGE for mechanics.
+Data is leverage. Transparency is leverage. Community is leverage. The app
+is the interface. Never lose sight of this.
+
+
+================================================================================
+SECTION 2 — STRATEGIC CONFLICTS, RESOLVED (READ THIS FIRST)
+================================================================================
+The three source documents disagreed in three places. These are the
+rulings. They are final for planning purposes.
+
+--------------------------------------------------------------------------------
+CONFLICT 1: WHO FIRST — SHOPS OR MECHANICS?
+--------------------------------------------------------------------------------
+Source A (brainstorm) said: B2B SaaS for shops FIRST, because "shops won't
+pay for a ghost town" and the freemium chicken-and-egg problem is fatal.
+Source C (original brief) said: free for mechanics, shops pay per post.
+
+NEW INFORMATION THAT CHANGES THE ANSWER:
+The founder is a multi-year, trusted member of DIESEL KNUCKLEBUSTERS with
+multiple community-viral posts and field-proven credibility (profile photo:
+balancing on a CAT637G tractor transmission hanging from a crane, one hand
+wrenching). This is a warm, dense, real-time pool of actual working diesel
+mechanics — the exact cold-start asset the shop-first pivot was designed to
+compensate for. The brainstorm made its shop-first recommendation WITHOUT
+knowing this pool existed.
+
+RULING — TWO-TRACK, MECHANIC-DENSITY-FIRST:
+- ACQUISITION is mechanic-first. The diesel community (DKB + adjacent
+  diesel/heavy groups) is the beachhead. The calculator is the wedge.
+  Mechanic trust and review density come BEFORE any shop sales motion.
+- REVENUE is still B2B. Mechanics never pay. Shops pay once there is
+  demonstrable mechanic density to recruit from. The shop dashboard and
+  paid tiers are built early but not SOLD until density milestones hit
+  (see Section 8 metrics).
+- Why this works when the brainstorm feared it wouldn't: the brainstorm
+  assumed you'd have to BUY mechanic attention. You don't. You already
+  HAVE it. The chicken-and-egg problem is solved by the founder's
+  standing in the community — but only for diesel. Every other trade and
+  metro must be seeded deliberately (see Section 8).
+- What survives from the shop-first argument intact: shops remain the
+  ONLY revenue source, the dashboard must be genuinely valuable (not a
+  ghost-town upsell), and the pitch "one filled bay pays for a decade of
+  subscription" ($20-25K/mo cost of an empty bay; $50-100K to replace an
+  A-level tech) remains the core sales math.
+
+--------------------------------------------------------------------------------
+CONFLICT 2: PRICING TIERS (three documents, three price sheets)
+--------------------------------------------------------------------------------
+  Source C:      $49/job post · $199/mo featured profile · $99/mo analytics
+  Source B:      $149-299/mo Shop Pro · $499-999/mo Shop Elite
+  Source A:      $99/199/499 by bay count + $9.99/mo mechanic premium
+
+RULING — LAUNCH PRICING (keep it simple, under-price recruiters):
+  MECHANICS:        Free forever. No premium tier at launch. (The $9.99
+                    "Bench" premium is deferred to Phase 3+ and only if The
+                    Bench ships — do not charge mechanics anything during
+                    community-building. It would poison the DKB well.)
+  SHOP BASIC:       $0 — claim profile, 1 active job post, respond to reviews
+  SHOP PRO:         $149/mo launch (list $199) — unlimited posts, verified
+                    pay-range badge, analytics, featured placement
+  SHOP ELITE:       $499/mo — multi-location, recruiter seat, API access
+  A LA CARTE:       $49/job post for shops that won't subscribe;
+                    $25-50 pay-per-application boost (week 10+)
+  DESIGN PARTNERS:  3-5 shops, free lifetime Pro, grandfathered forever.
+
+Deferred revenue streams (Phase 3+, from Source A, still valid):
+tool financing affiliate (Snap-on/Matco/Mac/Cornwell), shop insurance
+brokerage, predictive turnover alerts ($49/mo add-on), The Bench premium,
+union white-label ($1-2/member/mo — the $37.8M ARR whale), Wrench Report
+data products. Do NOT build these now. They are in the map so no one
+"invents" conflicting monetization mid-build.
+
+--------------------------------------------------------------------------------
+CONFLICT 3: BEACHHEAD GEOGRAPHY
+--------------------------------------------------------------------------------
+  Source C: soft launch Colorado Springs, then Denver.
+  Source B: diesel/heavy in a mid-size logistics hub (DFW, Indy, Columbus,
+            Atlanta).
+
+RULING — TRADE-FIRST, GEO-FLEXIBLE:
+The beachhead is the DIESEL/HEAVY-DUTY TRADE, not a city. DKB members are
+distributed; the community is the market. Geo-seeding strategy:
+  1. Seed shop data for the metros where DKB concentration is highest
+     (determine from founding-reviewer signup data — ask trade + zip at
+     founding-member signup).
+  2. Keep Colorado Springs/Denver seed data as DEV FIXTURES only (already
+     specified in build spec Step 2) — not as the launch market unless the
+     signup data says so.
+  3. The first "official" metro is wherever 50 founding reviewers cluster.
+     Automotive stays in the schema and the app (all trades supported) but
+     all launch ENERGY goes to diesel. Second trade = aviation/A&P
+     (extreme pay-transparency pain, per Source B research).
+
+DIESEL-SPECIFIC AMMUNITION (from Source B research — use in all messaging):
+  - 65.5% of diesel shops understaffed; 19.3% average vacancy rate (ATRI 2025)
+  - 44% of trucking diesel techs are considering other mechanic jobs
+  - 29% of diesel techs cite tool cost as the #1 barrier to entry ($10K+)
+  - $1,350/month tool-truck bills are real and confessed publicly
+  - 18 states + DC now mandate pay ranges in job postings (free tailwind)
+
+
+================================================================================
+SECTION 3 — NON-NEGOTIABLES (GLOBAL CONSTRAINTS FOR EVERY AGENT)
+================================================================================
+These override everything. Any agent output that violates these is rejected.
+
+1. NEVER sell review removal, review suppression, or reputation laundering.
+   Monetization = visibility and tools, never silence. Say this publicly
+   and often — it is a trust asset. (Sources A + B both flag this as fatal.)
+
+2. MECHANICS NEVER PAY. Free forever: jobs, reviews, calculator, pay data.
+
+3. TWO LANGUAGES, NEVER MIXED ON ONE SCREEN (Source C branding guide):
+   - mechanic_copy: real talk, toolbox-at-lunch voice. Direct, honest,
+     no corporate BS. Approved examples live in 06-BRANDING-VOICE.txt.
+   - shop_copy: professional, respectful, data-driven. Same honesty,
+     different wrapper.
+   - neutral_copy: shared screens (login, settings) — clean and minimal.
+   Every string tagged by audience in code. UI is ALWAYS clean and
+   professional; the voice lives in microcopy. Never a slang shitfest.
+
+4. MESSAGING RULES THAT WILL GET YOU FLAMED IF BROKEN (Source B):
+   - Never say "technician shortage" in mechanic-facing copy — it reads as
+     owner propaganda. Say "shops competing for you."
+   - No stock photos of clean models holding wrenches. Instant death.
+   - No HR-speak ("competitive salary," "fast-paced environment").
+     Mock it if anything — it's the exact language mechanics distrust.
+   - Name flat rate out loud. The community rewards anyone who says it.
+   - Anonymity is sacred — employer retaliation fear is real and constant.
+
+5. MENTAL HEALTH IMPERATIVE (Source A): mechanics have one of the highest
+   suicide rates of any trade. When the review pipeline detects burnout/
+   crisis language, auto-offer resources (988 Suicide & Crisis Lifeline,
+   union EAP). Never sell this feature. Never use this data for targeting.
+   This is a moral obligation, not a feature.
+
+6. DESIGN SYSTEM TOKENS (Source C, locked):
+   Background #1A1A1A · Surface #2A2A2A · Primary #FF6B00 (warning orange)
+   Primary Light #FF8C42 · Secondary #4A90D9 · Success #4CAF50
+   Danger #E53935 · Text #FFFFFF / #B0B0B0 · Border #3A3A3A
+   Mobile-first, one-handed use, bold condensed typography, shop-floor
+   aesthetic. Feel like a Snap-on catalog, not a fintech app. The
+   calculator uses the same tokens (#ff6b00 accent) so the brand reads
+   as one product family from first contact.
+
+7. PRIVACY: pay stub uploads are anonymized (blur everything but the rate),
+   aggregate-only display, never show individual data. No selling mechanic
+   data to shops without explicit consent. Ever.
+
+
+================================================================================
+SECTION 4 — THE WEDGE: CALCULATOR + DIESEL KNUCKLEBUSTERS PLAYBOOK
+================================================================================
+This is the single most important section for launch. The calculator is not
+a feature — it is the "IN." It is a content engine disguised as a tool, and
+it passes community mod review where "download my app" posts get deleted.
+
+--------------------------------------------------------------------------------
+4.1 THE TOOL: "RUN THE NUMBERS — THE MECHANIC'S TRUE PAY CALCULATOR"
+--------------------------------------------------------------------------------
+Build spec: calculator_prompt.txt (complete, unchanged — hand it verbatim
+to the build agent). Summary of what it must be:
+  - Standalone single-file web page, no backend, no login, works over
+    file:// or any static host. Buildable in ONE agent session.
+  - Compares two job offers side by side: flat rate / hourly / salary,
+    flagged vs physical hours, slow-week modeling, insurance, 401k match,
+    PTO, tool allowance, tool costs, commute at IRS mileage rate.
+  - Headline output: EFFECTIVE HOURLY WAGE per job + delta + winner
+    banner + plain-English verdict ("The $5/hr raise is real — but only
+    in the busy months.").
+  - SHARE BUTTON rendering a screenshot-friendly summary card sized for
+    a Facebook post. THIS IS THE GROWTH LOOP. The share card carries
+    Wheels branding (#ff6b00 on dark) — every screenshot posted anywhere
+    is an ad.
+  - Validation test vector (must pass): flat rate $32/hr, flags 40 normal,
+    20 slow weeks at 25 hrs, 50 physical hrs/wk, $1,350/mo tool payment,
+    no benefits, 30-mi commute — outputs must be sane and consistent.
+
+BRIDGE TO THE APP (new, not in original spec — add after core works):
+  - Footer line on the share card: "wheels — know what you're walking into"
+  - Optional (no-pressure) waitlist capture: one field, phone or email,
+    copy: "We're building the review board the trade actually needs.
+    Get in early." Never gate the calculator behind it. Gating kills sharing.
+
+--------------------------------------------------------------------------------
+4.2 THE CHANNEL: DIESEL KNUCKLEBUSTERS (FOUNDER'S HOME FIELD)
+--------------------------------------------------------------------------------
+Founder assets that cannot be bought:
+  - Multi-year membership, multiple community-viral posts
+  - Profile photo IS the credibility: balancing on a CAT637G tractor
+    transmission hanging from a crane, one-handed wrenching. This reads
+    instantly to every tech in the group: "this guy has been there."
+  - This is the primary testing pool. Treat it accordingly.
+
+THE SEQUENCE (do not deviate):
+  STEP 1 — MODS FIRST. Private message to group admins/moderators BEFORE
+    posting anything. Not a pitch — a respect play: "Long-time member,
+    built a free tool that settles the flat-rate vs hourly arguments we
+    have in here every week. Want to make sure it's cool to share, and
+    happy to give you guys first look / lifetime status when the bigger
+    thing launches." Mods who feel consulted become allies; mods who feel
+    bypassed become executioners.
+  STEP 2 — SHARE THE CALCULATOR AS A MEMBER, NOT A FOUNDER. First post is
+    a genuine contribution: run a scenario the group argues about (flat
+    rate $32 vs hourly $28 + benefits + tool allowance), post the share
+    card, ask what the group thinks of the math. Let members break it.
+    Fix what they find. THAT is the beta test.
+  STEP 3 — RECRUIT FOUNDING REVIEWERS FROM THE COMMENTS. The mechanics who
+    engage hardest are your founding 50. Personal outreach: founding-member
+    flair, lifetime free everything, their names (if they want) in the
+    credits. 50 honest reviews in one trade > 5,000 scattered.
+  STEP 4 — ONLY AFTER DENSITY: the app reveal. By then it's not a stranger
+    promoting an app — it's a known member showing the group what their
+    feedback built. "You guys broke the calculator, so I built the rest."
+
+RULES OF ENGAGEMENT (from Source B, adapted to Facebook):
+  - Value-first, link-second. Always.
+  - Never astroturf. Communities detect and destroy it, and the founder's
+    multi-year reputation is worth more than any growth hack.
+  - Dual-sided awareness: shop owners lurk in diesel groups too. The same
+    calculator content that recruits mechanics is quietly demoing the
+    platform to future paying shops. Don't pander to either side — the
+    transparency IS the pitch to both.
+  - Everything in the group's voice. The founder already speaks it. No
+    marketing copy in group posts — write like the viral posts that
+    already worked.
+
+EXPANSION CHANNELS (only after DKB works — Source B playbook, in order):
+  1. Adjacent diesel/heavy Facebook groups + r/Justrolledintotheshop,
+     r/Truckers (value-first, rule-compliant; calculators pass mod review)
+  2. TikTok/YouTube Shorts: "Run the Numbers" calculator demos,
+     "Shop Confessions" (anonymized real reviews over shop b-roll),
+     "Pay Range or It Didn't Happen" — 20-30 banked before app launch
+  3. Trade schools: UTI, WyoTech, Lincoln Tech diesel programs — free
+     pizza + "know your worth" + calculator demo. Cheap, fast installs.
+  4. Tool trucks: Snap-on/Mac/Matco dealers are franchisees — local deals,
+     sticker/card on the truck. Reaches 100% of working techs in a metro.
+  5. Mid-tier trade creators (50K-500K followers, e.g. Flat Rate Master
+     tier and below) — audiences are 90%+ working techs, rates far below
+     consumer influencers.
+
+
+================================================================================
+SECTION 5 — TARGET ARCHITECTURE (RECONCILED)
+================================================================================
+Stack (from Source C, unchanged):
+  Frontend:  React Native (Expo recommended for iteration speed)
+  Backend:   Node.js + Express, PostgreSQL, JWT + Firebase Auth (phone)
+  Hosting:   AWS/Vercel/Railway — cheap to start
+  Payments:  Stripe · Maps: Google Maps API
+  PLUS (from Source A, scheduled): Whisper API (voice reviews), OCR
+  (Tesseract.js or AWS Textract) for pay stubs, GPT-class structuring.
+
+DATA MODEL DELTAS — the Source C schema is the base; the brainstorm's
+diagnosis requires these changes in migration v2 (build them NOW, not
+later — retrofitting trust architecture is how platforms die):
+
+  reviews table:
+    + verification_state  ENUM ('anonymous','verified_employee',
+      'verified_customer')  DEFAULT 'anonymous'
+      — replaces the single 'verified' boolean (keep boolean as computed
+        shorthand: verified = state != 'anonymous')
+    + verification_method VARCHAR (pay_stub | w2 | union | receipt | none)
+    + review_weight       DECIMAL — computed from state x tenure x recency
+    + culture dimension ratings already exist (4 sliders: pay structure,
+      management, tool policy, work/life) — extend to 7 when the Culture
+      Score ships (add: safety, growth, overtime fairness) but DO NOT
+      block launch on it.
+  shops table:
+    + pay_structure badge field EXISTS (pay_structure enum) — surface it
+      prominently in UI ("Pay Structure" badge is a differentiator no
+      general job board has).
+    + wheels_certified    BOOLEAN DEFAULT FALSE (Phase 2: posts real pay
+      ranges + >=3.5 stars with 5+ reviews + responds to reviews)
+  NEW table: pay_stubs (OCR pipeline)
+    id, user_id (hashed), shop_id, trade_type, zip_code,
+    extracted_rate DECIMAL, confidence DECIMAL, status ENUM
+    ('pending','verified','rejected'), created_at
+    — raw image stored encrypted, PII blurred, never exposed via API.
+      Percentile aggregation view: 25th/50th/75th/90th by trade+zip.
+  NEW table: waitlist (from calculator bridge)
+    contact VARCHAR, source VARCHAR DEFAULT 'calculator', trade_type,
+    zip_code, created_at — this table doubles as the metro-selection
+    dataset (Section 2, Conflict 3 ruling).
+
+AUTH: ship Firebase phone auth per Source C for MVP. Passkeys/WebAuthn
+(Source A) is the identity endgame — pilot in Phase 2, do not block launch.
+
+FEATURE PRIORITIES (Source A priority matrix, compressed to what survives
+contact with the launch plan):
+  BUILD NOW (Phase 1): calculator (wedge), tri-state review architecture,
+    pay-stub OCR pipeline, pay percentile display, pay structure badges,
+    core app (jobs/reviews/profiles per Source C spec).
+  BUILD NEXT (Phase 2): Culture Score radar, voice-first reviews (Whisper),
+    shop dashboard + Stripe billing, Wheels Certified Shop + bay sticker,
+    review velocity detection, 48-hour review escrow.
+  BUILD LATER (Phase 3): The Bench, Tool Inventory OS, SOS Network,
+    predictive turnover, union API pilot.
+  NEVER / TRAPS (Source A, confirmed): blockchain cert verification,
+    replacing Google Maps, friend-list/messaging social features.
+    The SOS Network is the only social feature that matters — and not yet.
+
+
+================================================================================
+SECTION 6 — WORKSTREAMS (DISTRIBUTION MANIFEST FOR THE COMPOSER)
+================================================================================
+Each workstream (WS) is a self-contained task package. Dependencies are
+explicit. Every agent receives Sections 1-5 as context plus its WS spec.
+Order is optimized for: wedge live first, app MVP second, money third.
+
+--------------------------------------------------------------------------------
+WS-0  THE WEDGE — TRUE PAY CALCULATOR          [no dependencies — START HERE]
+--------------------------------------------------------------------------------
+Goal: ship the standalone calculator as fast as possible. This unblocks
+the entire DKB playbook (Section 4) while the app is being built.
+Input: calculator_prompt.txt (hand to agent VERBATIM) + design tokens
+(Section 3, item 6) + share-card branding line (Section 4.1).
+Deliverable: single-file HTML/JS page + deployed static URL.
+Acceptance criteria:
+  - Validation test vector passes (flat $32 scenario — outputs sane)
+  - Share card renders clean at Facebook post dimensions, brand visible
+  - Works one-handed on a phone, over file://, zero console errors
+  - Waitlist capture POSTs to a stub endpoint (WS-1 provides the real one;
+    until then, log to localStorage — do NOT block ship on the backend)
+
+--------------------------------------------------------------------------------
+WS-1  BACKEND FOUNDATION                        [depends on: nothing]
+--------------------------------------------------------------------------------
+Goal: scaffold + database v2 + auth/middleware.
+Input: Source C files 01-ARCHITECTURE, 02-DATABASE-SCHEMA, 03-BACKEND-API-SPEC,
+05-ENV-SECRETS + Section 5 DATA MODEL DELTAS (this document).
+Tasks (from Source C Steps 1-3, amended):
+  1. Folder scaffold (backend/ structure per spec) + package.json
+  2. PostgreSQL schema WITH Section 5 deltas (tri-state reviews, pay_stubs,
+     waitlist, wheels_certified) — migrations + seed script
+     (20 shops / 8+ trades / 30+ reviews / 15+ jobs as DEV FIXTURES)
+  3. Firebase Admin + JWT + auth middleware + Joi validation + error
+     handler + rate limiter + /health
+  4. Waitlist endpoint: POST /api/v1/waitlist (public, rate-limited)
+Acceptance criteria: migrations run clean, seeds load, auth middleware
+verifies a Firebase token, /health returns 200, waitlist endpoint stores rows.
+
+--------------------------------------------------------------------------------
+WS-2  CORE API                                   [depends on: WS-1]
+--------------------------------------------------------------------------------
+Goal: shops, reviews, jobs, users routes (Source C Steps 4-5).
+Input: 03-BACKEND-API-SPEC + Section 5 deltas.
+Key amendments to the original spec:
+  - POST review accepts verification_state + optional pay stub upload ref
+  - culture_score / would_return_pct computed with review_weight
+    (verified = 2x, recency decay: <6mo full, 6-12mo 50%, >12mo 25%)
+  - GET /pay-percentiles?trade=&zip= → 25/50/75/90 percentiles from
+    verified pay_stubs only (aggregate, min sample threshold: suppress
+    output under n=5 to protect anonymity)
+Acceptance criteria: full CRUD per spec, aggregation updates on review
+write, Jest+Supertest integration tests green (Source C Step 6).
+
+--------------------------------------------------------------------------------
+WS-3  PAY STUB OCR PIPELINE                      [depends on: WS-1]
+--------------------------------------------------------------------------------
+Goal: upload -> blur PII -> extract rate -> verification queue.
+Input: Source A diagnosis #1/#3 + tech brief (Tesseract.js or AWS Textract).
+Deliverables: POST /pay-stubs (authed), extraction worker, moderation
+queue (status pending/verified/rejected), percentile aggregation feeding
+WS-2's /pay-percentiles.
+Acceptance criteria: stub image stored encrypted, PII blurred before any
+human review, extracted_rate lands in pay_stubs, API never returns raw images.
+Legal note for the human: wage disclosure laws vary by state — get counsel
+review before marketing this loudly. 18+ states already mandate ranges;
+that is the tailwind, not the legal review.
+
+--------------------------------------------------------------------------------
+WS-4  MOBILE APP                                 [depends on: WS-2; WS-3 for
+                                                  the verified-badge flow]
+--------------------------------------------------------------------------------
+Goal: the React Native MVP exactly per Source C 04-FRONTEND-SPEC and
+Steps 7-10: bottom tabs (Jobs / Search / Review / Profile), JobFeed +
+FilterModal, ShopProfile (quick stats, pay & benefits checklist, embedded
+Tool Investment Calculator section, reviews with sort, active jobs),
+WriteReview (3-step with pay stub upload + approved microcopy), MyProfile.
+Global constraints: design tokens (Section 3.6), two-language copy rules
+(Section 3.3), approved microcopy from 06-BRANDING-VOICE used verbatim
+where specified.
+Acceptance criteria: runs on iOS+Android simulators, all API integrations
+end-to-end, loading skeletons + error boundaries, haptics on key actions,
+production build (APK/Expo preview).
+
+--------------------------------------------------------------------------------
+WS-5  SHOP DASHBOARD + BILLING                   [depends on: WS-2]
+--------------------------------------------------------------------------------
+Goal: the money layer — but built, not sold (selling starts at Section 8
+milestones).
+Scope (web, can be a simple React/Next app or server-rendered — pick the
+cheapest thing that works):
+  - Shop claim flow + owner auth
+  - Job posting CRUD (1 active free; unlimited on Pro)
+  - Review response (respond publicly — NEVER delete)
+  - Analytics: profile views, applicant funnel, competitor pay benchmark
+    (from /pay-percentiles)
+  - Stripe: tiers per Section 2 Conflict 2 ruling + $49 a-la-carte post
+Acceptance criteria: Stripe test-mode checkout + webhook updates tier,
+tier gates enforced server-side, owner cannot touch reviews except respond.
+
+--------------------------------------------------------------------------------
+WS-6  TRUST & SAFETY LAYER                       [depends on: WS-2]
+--------------------------------------------------------------------------------
+Goal: the anti-gaming minimum viable set (Source A Section 05, Phase 2 subset):
+  - Review velocity detection (5+ reviews/24h on one shop -> manual queue)
+  - 48-hour review escrow for verified-employee reviews (shop notified,
+    may dispute facts not opinions; disputes -> human moderation)
+  - Linguistic fingerprinting (duplicate/coordinated review detection)
+  - Mental health flagging -> auto-offer 988/EAP resources (Section 3.5)
+  - 3-strike enforcement + monthly transparency report data collection
+Acceptance criteria: flags route to a moderation queue, escrow timer works,
+crisis-language detection triggers resource offer (and NOTHING else —
+no ads, no targeting, no scoring impact).
+
+--------------------------------------------------------------------------------
+WS-7  SEED DATA & CONTENT OPS                    [depends on: founder, not code]
+--------------------------------------------------------------------------------
+NON-CODE workstream — for the founder or an ops assistant:
+  1. Replace fixture seed data with REAL shop profiles: public info,
+     state pay-transparency-law postings (18+ states = free legal pay
+     ranges), external sentiment summaries. 20 shops, diesel-heavy,
+     in the metros founding reviewers cluster in.
+  2. Bank 20-30 short videos before app launch (Run the Numbers demos,
+     Shop Confessions, Pay Range or It Didn't Happen).
+  3. Recruit 3-5 shop design partners (free lifetime Pro, real jobs with
+     real pay ranges, feedback loop).
+  4. Mod outreach script for DKB (Section 4.2 Step 1) — founder writes
+     this personally. It cannot be delegated or templated into fakeness.
+
+--------------------------------------------------------------------------------
+WS-8  PHASE 2+ BACKLOG (NOT YET — DO NOT DISTRIBUTE)
+--------------------------------------------------------------------------------
+Held for later phases so no agent builds them early:
+  Culture Score 7-dimension radar · voice-first reviews (Whisper) ·
+  The Bench · Tool Inventory OS · SOS Network · predictive turnover ·
+  union API pilot · Passkeys migration · Wrench Report quarterly ·
+  programmatic SEO pages ("{trade} mechanic salary in {city}") ·
+  expansion metro playbook (2-week compression) · aviation/A&P second trade.
+
+
+================================================================================
+SECTION 7 — SEQUENCED TIMELINE
+================================================================================
+WEEK 0-2:   WS-0 ships (calculator live). Founder begins DKB mod outreach
+            (WS-7.4). WS-1 + WS-2 running in parallel.
+WEEK 2-4:   Calculator shared in DKB per Section 4.2 sequence. Founding
+            reviewer recruitment begins. WS-3 + WS-4 building.
+WEEK 4-10:  App MVP done (WS-4). Founding 50 reviewers seeded. Content
+            bank built. DKB app reveal (Step 4). Reddit/FB expansion per
+            Source B Phase 1. WS-5 building.
+WEEK 8-14:  WS-5 live. Design partners grandfathered. Paid tiers flip ON
+            in beachhead. First revenue target: 5 Pro shops (~$1-1.5K MRR).
+            Week 10: pay-per-application boost. Week 12: Wheels Certified
+            Shop badge + physical bay sticker (the Yelp-sticker flywheel).
+WEEK 14+:   Second metro/trade per data. Phase 2 workstreams (WS-6 full,
+            Culture Score, voice reviews) per Source A roadmap months 4-6.
+MONTH 7-12: Monetization & moat per Source A roadmap Phases 3-4, gated by
+            the kill criteria below. Union conversations START (they move
+            slow — open the door now, expect nothing before month 12).
+
+CRITICAL PATH: WS-0 -> DKB seeding -> founding reviews -> app reveal ->
+shop density -> paid tiers. Everything else hangs off this chain.
+
+
+================================================================================
+SECTION 8 — METRICS & KILL CRITERIA
+================================================================================
+FIRST 90 DAYS (beachhead, from Source B, diesel-adjusted):
+  Verified mechanic signups .......... 1,500
+  Reviews posted ..................... 300+
+  Shops with claimed profiles ........ 40
+  Paying shops (Pro+) ................ 5-10  (~$1.5-3K MRR)
+  Calculator share-card posts ........ tracked (new — the wedge's KPI)
+  Short-form video views ............. 500K cumulative
+  Organic share of installs .......... >60% (paid ads are NOT the engine)
+
+SOURCE A GATES (still binding):
+  - Pay transparency: 500+ verified stubs in first 30 days of the feature
+    or the core value prop is unproven
+  - 10 paying shops by month 7 or the B2B model is unproven
+  - Pay stub fraud rate >5% = verification system broken, stop and fix
+
+ITERATE TRIGGERS:
+  - Reviews < 10/week by week 6 -> ambassador/founding program isn't
+    working; pivot incentives BEFORE spending on ads.
+  - Shop conversion < 5% of claimed profiles by week 12 -> reprice or
+    pull the pay-per-application option forward.
+
+KILL CRITERIA (from Source A, unmodified):
+  - <100 DAU by month 3 · <10 paying shops by month 6 · <1,000 verified
+    reviews by month 6 · union pilot unstarted by month 6 (long-lead).
+
+
+================================================================================
+SECTION 9 — RISK REGISTER (MERGED)
+================================================================================
+RISK                              MITIGATION
+Cold start / empty platform       SOLVED BY DESIGN: DKB warm pool +
+                                  calculator wedge (Section 4). Do not
+                                  launch the app empty — founding 50 first.
+Founder reputation exposure       Mods first. Value-first. Never astroturf.
+(DKB is a multi-year asset)       Calculator before app. If the community
+                                  rejects the tool, you lose a post — not
+                                  the group's trust. Protect the standing.
+Defamation claims from shops      Anonymous-but-verified model; pros/cons
+                                  factual structure; moderation queue;
+                                  legal review of ToS; never publish
+                                  unverifiable claims of illegal conduct.
+Shop retaliation vs reviewers     No manager-visible identities; minimum-
+                                  review thresholds before scores publish;
+                                  90-day retaliation watch flag (Source A).
+Astroturfed reviews               Tri-state verification, velocity flags,
+                                  linguistic fingerprinting (WS-6).
+Shops gaming verified reviews     Employer-confirmation escrow; human
+                                  moderation of disputes; transparency report.
+Incumbent response (Indeed adds   Speed + trade-specific depth generalists
+pay ranges)                       will never build: pay structure badges,
+                                  tool policy scores, culture dimensions.
+Community backlash to promotion   Calculator-as-content, real ambassadors,
+                                  value-first posting (Source B rules).
+Legal: wage disclosure variance   Counsel review before loud marketing of
+                                  pay-stub feature; lean on the 18-state
+                                  mandate tailwind in messaging.
+THE ONE THING THAT WILL KILL YOU  Prioritizing shop revenue over mechanic
+(Source A, final warning)         trust. Shops will offer money to suppress
+                                  negative reviews. Say no. Every time.
+                                  Credibility is the only asset.
+
+
+================================================================================
+SECTION 10 — THE NORTH STAR (from Source A, kept intact on purpose)
+================================================================================
+The mechanic trade is one of the last industries where workers have no
+leverage. They don't know what they're worth, what other shops pay, or
+which shops are toxic until it's too late.
+
+Wheels changes that — not by being a better job board, but by treating
+mechanics like professionals with choices. If a mechanic gets a $5/hr
+raise because of your pay data, he tells every mechanic he knows. Word of
+mouth in the trades is everything. One success story is worth 1,000 ads.
+Make success stories the marketing strategy.
+
+The founder is already standing in the community this product serves —
+literally, in the profile picture, one hand on a wrench over a hanging
+CAT637G transmission. That is the whole brand. Build it honest, build it
+for them, and they will build the empire.
+
+Year 1: 10,000 mechanics, 100 paying shops.
+Year 3: the Bloomberg Terminal of the trades.
+Everything else is just code.
+
+================================================================================
+APPENDIX — SOURCE DOCUMENT INVENTORY
+================================================================================
+Source A (Innovation Brainstorm): wheels-strategic-brief/01-10
+  (diagnosis, features, tech, business model, trust & safety, off-the-wall,
+   priority matrix, roadmap, final thoughts, readme)
+Source B (Promotion): Wheels_Marketing_and_Profit_Plan.md
+  (VoC research, positioning, launch phases, pricing, messaging, metrics,
+   risks, 20 cited sources)
+Source C (Build): 00-PROJECT-BRIEF, 01-ARCHITECTURE, 02-DATABASE-SCHEMA,
+  03-BACKEND-API-SPEC, 04-FRONTEND-SPEC, 05-ENV-SECRETS, 06-BRANDING-VOICE,
+  07-STEP-BY-STEP-PROMPTS, 08-MONETIZATION, 09-SETUP-README,
+  calculator_prompt.txt
+Existing artifacts: working app scaffold (wheels/ backend+mobile), brand
+asset library (wheels-brand-assets/), deployed calculator/landing HTML.
+
+Where this document and a source conflict, THIS DOCUMENT WINS.
+================================================================================
+                              END OF THE ATLAS
+================================================================================

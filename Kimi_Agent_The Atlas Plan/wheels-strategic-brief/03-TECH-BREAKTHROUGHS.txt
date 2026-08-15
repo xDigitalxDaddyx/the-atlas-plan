@@ -1,0 +1,96 @@
+================================================================================
+WHEELS STRATEGIC BRIEF — 03: TECH BREAKTHROUGHS
+State-of-the-art technologies that could make WHEELS uncopyable in 2026.
+================================================================================
+
+PRODUCTION READY (Use these now)
+---------------------------------
+
+1. AGENTIC AI
+   Autonomous agents that negotiate job offers on behalf of mechanics.
+   
+   Example: "My agent won't let me work for less than $45/hr with tool 
+   allowance, 2 weeks PTO, and ASE reimbursement." The agent fields offers, 
+   asks clarifying questions, and only surfaces deals that meet criteria.
+   
+   Stack: OpenAI Assistants API or LangChain agents. Persistent memory 
+   of mechanic preferences. Shop-facing dashboard shows agent negotiations.
+   
+   Why this is huge: It removes the awkwardness of salary negotiation 
+   for mechanics who hate asking for more money. The agent is the bad guy.
+
+2. PASSKEYS / WEBAUTHN
+   Replace Firebase phone auth with cryptographic passkeys. Biometric login 
+   (Face ID, fingerprint). No SMS interception. No number changes. No 
+   password resets. True persistent identity.
+   
+   Stack: Native Passkeys on iOS 16+ / Android 14+. Fallback to password 
+   manager integration (1Password, Bitwarden).
+   
+   Why this matters: Phone auth is great for emerging markets, terrible 
+   for professional identity. Mechanics change numbers. Shops have landlines.
+   Passkeys are the future of auth.
+
+3. MULTIMODAL AI (GPT-4V / CLAUDE 3)
+   Beyond text — analyze photos, videos, documents.
+   
+   Applications:
+     - Shop photo analysis (safety, cleanliness, organization)
+     - Pay stub OCR and verification
+     - Tool identification from photos
+     - Receipt parsing for tool inventory
+   
+   Stack: OpenAI GPT-4V API or Anthropic Claude 3. Fine-tune on shop 
+   photos for domain-specific accuracy.
+
+4. WHISPER API (VOICE-TO-TEXT)
+   Open-source speech recognition. Handles accents, background noise, 
+   technical jargon. Perfect for shop-floor review dictation.
+   
+   Stack: OpenAI Whisper API or self-hosted Whisper Large v3. Real-time 
+   streaming for live dictation.
+
+RESEARCH → PRODUCTION (6-12 month horizon)
+-------------------------------------------
+
+5. FEDERATED LEARNING
+   Train salary prediction models across user devices without centralizing 
+   sensitive pay data. Each phone trains locally on its own data. Only 
+   model updates (not raw data) are sent to the server. Aggregated model 
+   improves for everyone.
+   
+   Why this matters: GDPR bulletproof. CCPA compliant. Mechanics keep 
+   their pay data on their device. You get the intelligence without the 
+   liability.
+   
+   Stack: TensorFlow Federated or PySyft. Complex but becoming production-ready.
+
+6. ZERO-KNOWLEDGE PROOFS (ZKP)
+   Cryptographic proof that a mechanic worked at a shop without revealing 
+   their identity, dates, or any other details. Shop verifies employment 
+   without seeing the mechanic's profile.
+   
+   Why this matters: Ultimate privacy. Ultimate trust. No database of 
+   employment history to hack.
+   
+   Stack: zk-SNARKs or zk-STARKs. Overkill for MVP but worth watching.
+
+EARLY ADOPTERS (12-24 month horizon)
+-------------------------------------
+
+7. SPATIAL COMPUTING (Apple Vision Pro / Meta Quest 3)
+   Virtual shop tours before accepting a job offer. Mechanics inspect bays, 
+   tool organization, cleanliness in immersive 3D. No more "the photos were 
+   from 2019" surprises.
+   
+   Stack: Unity or native VisionOS development. 360-degree camera rigs 
+   for shops to capture tours.
+
+8. BLOCKCHAIN CERTIFICATION VERIFICATION
+   Partner with ASE, FAA, OEMs to issue NFT-based or verifiable credential 
+   certifications. Mechanics own their credentials. Shops verify instantly. 
+   No more fake ASE certs. Portable across platforms.
+   
+   Reality check: The market is not ready for this. Credentialing bodies 
+   are bureaucratic. But start the conversation now. Be first when they 
+   are ready.
