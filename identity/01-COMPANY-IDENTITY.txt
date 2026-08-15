@@ -6,8 +6,8 @@ COMPANY NAME:
   Sawka Solutions LLC
 
 PRODUCT NAME:
-  Wheels
-  Full brand: "It Has Wheels For A Reason"
+  Atlas
+  Full brand: "It Has Atlas For A Reason"
 
 FIRST TOOL:
   Run The Numbers — The Mechanic's True Pay Calculator (free forever)
@@ -19,7 +19,7 @@ DOMAIN:
 TAGLINE
 --------------------------------------------------------------------------------
   "Know what you're walking into before you walk out."
-  Secondary: "It's got wheels for a reason."
+  Secondary: "It's got Atlas for a reason."
 
 --------------------------------------------------------------------------------
 MISSION STATEMENT (formal — for partners, press, paperwork)
@@ -45,13 +45,13 @@ COMPANY GOAL
   Year 1: Become the trusted source of pay and culture data in the diesel/
   heavy-duty community — 10,000 mechanics, 100 paying shops.
   Long term: The Bloomberg Terminal of the trades. Every mechanic checks
-  Wheels before accepting an offer. Every shop checks Wheels before posting
+  Atlas before accepting an offer. Every shop checks Atlas before posting
   one. Every wage conversation in the industry starts with our data.
 
 --------------------------------------------------------------------------------
 WHAT WE ARE BUILDING (the one-paragraph answer)
 --------------------------------------------------------------------------------
-  Wheels is a transparent job board and shop review platform for ALL
+  Atlas is a transparent job board and shop review platform for ALL
   mechanics — automotive, diesel and heavy equipment, aircraft, marine,
   motorcycle, industrial, HVAC, and every other trade where someone turns
   wrenches for a living. Job listings with real pay ranges and pay structure
@@ -66,7 +66,7 @@ WHAT WE ARE BUILDING (the one-paragraph answer)
 THE STRUCTURE (how the pieces fit)
 --------------------------------------------------------------------------------
   Sawka Solutions LLC          <- the company (legal entity)
-    └── Wheels                 <- the platform (the app, in development)
+    └── Atlas                 <- the platform (the app, in development)
           └── Run The Numbers  <- the free calculator (live first, the
                                    community's introduction to the brand)
 

@@ -9,11 +9,11 @@ Atlas is a transparent job platform and shop review app for **all mechanics** �
 ## What's in this repo
 
 ```
-wheels/
+app/
 ├── backend/    # Node.js + Express + PostgreSQL API (Firebase Auth, JWT, Stripe-ready)
 ├── mobile/     # React Native app (Jobs, Search, Review, Profile)
 ├── docs/       # API documentation
-└── README.md
+└── verifier/   # Verifier index (append-only)
 ```
 
 ## The problem

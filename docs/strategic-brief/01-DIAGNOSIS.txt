@@ -1,5 +1,5 @@
 ================================================================================
-WHEELS STRATEGIC BRIEF — 01: THE DIAGNOSIS
+Atlas STRATEGIC BRIEF — 01: THE DIAGNOSIS
 What is broken, missing, or dangerously assumed in the current build.
 ================================================================================
 

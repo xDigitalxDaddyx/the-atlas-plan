@@ -4,7 +4,7 @@ FACT SHEET — quick-reference answers for anyone doing diligence
 ================================================================================
 
 COMPANY:          Sawka Solutions LLC (formation in progress)
-PRODUCT:          Wheels — "It Has Wheels For A Reason"
+PRODUCT:          Atlas — "It Has Atlas For A Reason"
 LIVE NOW:         Run The Numbers — The Mechanic's True Pay Calculator
                   (free, no signup, no data harvesting)
 WEB:              sawkasolutions.help
@@ -37,11 +37,11 @@ THE NUMBERS BEHIND THE NEED (citable industry facts):
   - An empty bay costs a shop $20,000–$25,000/month in lost revenue
   - Replacing an A-level technician costs $50,000–$100,000
   - 18 states + DC now require pay ranges in job postings — transparency
-    is where the law is already going; Wheels is where it's going first
+    is where the law is already going; Atlas is where it's going first
 
 CURRENT STATUS:
   Phase 1: Calculator live, community seeding via the diesel community.
-  Phase 2: Wheels app (job feed, reviews, shop profiles) in active build.
+  Phase 2: Atlas app (job feed, reviews, shop profiles) in active build.
   Phase 3: Shop dashboard and paid tiers switch on after mechanic-side
            density is proven. Roadmap and kill criteria are defined in the
            master plan (THE ATLAS).

@@ -5,37 +5,58 @@ master repo for the entire project — planning docs, product code, tools, and b
 assets in one place.
 
 > **Working codename: "Atlas".** The final product name hasn't been decided yet.
-> The app and code carry the placeholder name `Atlas` so nothing ships with an
-> outdated brand. Historical planning and marketing documents from the earlier
-> "Wheels" era are kept as-is for reference.
+> Everything carries the placeholder name `Atlas` so nothing ships with an outdated
+> brand. When you pick the real name, the rename is a repo-wide find-replace (see
+> below).
 
 ## What's in this repo
 
 ```
-├── company-identity/                          # Brand identity, fact sheet, ready-to-use blurbs
-├── Kimi_Agent_The Atlas Plan/
-│   ├── THE ATLAS.txt                          # Master consolidated plan (v1.0)
-│   ├── calculator.html                        # "Run The Numbers" pay calculator (single-file)
-│   ├── calculator-v2.html, calculator-v3.html # Newer calculator versions
-│   ├── TEST-SCENARIOS.md                      # Verified test scenarios for the calculator
-│   ├── index.html                             # Strategic innovation brief (rendered)
-│   ├── wheels/                                # Product code (working title: Atlas)
-│   │   ├── backend/                           # Node.js + Express + PostgreSQL API
-│   │   ├── mobile/                            # React Native (Expo) app
-│   │   ├── docs/                              # API documentation
-│   │   └── verifier/                          # Verifier index (append-only)
-│   ├── wheels-brand-assets/                   # Logos, illustrations, app icons (Wheels-era)
-│   └── wheels-strategic-brief/                # 10-part strategic brief (Wheels-era)
+├── calculator.html          # "Run The Numbers" pay calculator (hosted: /calculator.html)
+├── calculator-v2.html       # Calculator, blueprint style (hosted: /calculator-v2.html)
+├── calculator-v3.html       # Calculator, diagnostic printout style (hosted: /calculator-v3.html)
+├── index.html               # Landing page (hosted: /)
+├── strategic-brief.html     # Rendered strategic innovation brief (hosted: /strategic-brief.html)
+├── docs/                    # Planning + marketing docs
+│   ├── THE ATLAS.txt        #   Master consolidated plan (v1.0)
+│   ├── marketing-plan.md    #   Go-to-market & profit plan
+│   ├── TEST-SCENARIOS.md    #   Verified calculator test scenarios
+│   ├── calculator_prompt.txt
+│   └── strategic-brief/     #   10-part strategic brief
+├── identity/                # Brand identity, fact sheet, ready-to-use blurbs
+├── brand-assets/            # Logos, illustrations, app icons, OG images
+└── app/                     # Product code
+    ├── backend/             #   Node.js + Express + PostgreSQL API
+    ├── mobile/              #   React Native (Expo) app
+    ├── docs/                #   API documentation
+    └── verifier/            #   Verifier index (append-only)
 ```
 
-## Quick start
+## Hosting (GitHub Pages)
 
-The product code lives in `Kimi_Agent_The Atlas Plan/wheels/`. See its README for
-backend + mobile setup.
+The repo is published at **https://xdigitalxdaddyx.github.io/the-atlas-plan/**.
+Any push to `main` automatically rebuilds the site.
 
-## Naming notes
+- Calculator: `https://xdigitalxdaddyx.github.io/the-atlas-plan/calculator.html`
+- Landing page: `https://xdigitalxdaddyx.github.io/the-atlas-plan/`
 
-- `Atlas` is a placeholder until a final name is chosen. Search-and-replace `Atlas`
-  repo-wide when the name is locked in.
-- Strategy/marketing documents from the "Wheels" era intentionally still say
-  "Wheels" — they're historical planning artifacts, not shipped branding.
+All three calculators have Open Graph tags pointing at a hosted preview image, so
+links shared on Facebook (and most chat apps) show a rich preview card. After any
+change that affects the preview, force Facebook to re-scrape:
+
+1. Open the [Sharing Debugger](https://developers.facebook.com/tools/debug/)
+2. Paste the calculator URL and click **Debug** → **Scrape Again**
+
+## When you pick the final name
+
+1. Decide the name, e.g. `Torque`.
+2. Replace `Atlas` / `atlas` repo-wide (case-sensitive passes, then one
+   case-insensitive pass for stragglers).
+3. Rename the repository on GitHub (Settings → General → Repository name).
+4. Update the OG URLs in the three calculator files and `index.html` (the
+   `github.io/the-atlas-plan/...` links).
+5. Re-scrape in the Facebook Sharing Debugger.
+
+## Quick start (product code)
+
+The backend and mobile app live in `app/`. See `app/README.md` for setup.

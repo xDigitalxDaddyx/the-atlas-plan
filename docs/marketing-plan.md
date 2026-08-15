@@ -1,5 +1,5 @@
-# Wheels — Go-to-Market & Profit Plan
-### "It Has Wheels For A Reason." — Transparent job board + shop reviews for every mechanic trade
+# Atlas — Go-to-Market & Profit Plan
+### "It Has Atlas For A Reason." — Transparent job board + shop reviews for every mechanic trade
 *Research-based marketing plan built from real mechanic sentiment on Reddit, trade forums, TikTok/YouTube, and industry reports. August 2026.*
 
 ---
@@ -14,7 +14,7 @@ Across r/HVAC, r/mechanics, r/aviationmaintenance and r/Justrolledintotheshop, t
 
 - On r/HVAC, threads like "Let's talk pay" and "How much do HVAC techs actually make?" are among the most engaged recurring topics; techs openly distrust job boards ("I see listings on ZipRecruiter for 80k+ jobs… then Google says the average pay is 55k, so which is it?"). Techs in these threads share exact numbers ($28.50/hr employee-owned, $44/hr Minneapolis) — proving demand for crowdsourced, verified pay data already exists but has no home. [^16^][^18^]
 - An aircraft mechanic's viral r/aviationmaintenance post ("This industry is facing a serious wakeup call") describes effective pay of ~$3.17/hr after unpaid procedures and call-outs — a transparency failure so extreme it generated hundreds of comments. [^5^]
-- 18 states + DC now mandate pay ranges in job postings, with more coming (Massachusetts Oct 2025, New Jersey Jun 2025, Vermont Jul 2025, Virginia Jul 2026). The cultural and legal wind is entirely behind Wheels' core value prop — this is a free tailwind for messaging. [^28^][^31^]
+- 18 states + DC now mandate pay ranges in job postings, with more coming (Massachusetts Oct 2025, New Jersey Jun 2025, Vermont Jul 2025, Virginia Jul 2026). The cultural and legal wind is entirely behind Atlas' core value prop — this is a free tailwind for messaging. [^28^][^31^]
 
 **Marketing implication:** "Real pay ranges, posted by real techs" is not a feature — it's the entire spear tip.
 
@@ -23,7 +23,7 @@ Across r/HVAC, r/mechanics, r/aviationmaintenance and r/Justrolledintotheshop, t
 - "Mechanics Are QUITTING Because of This — Flat Rate is Broken!" and Flat Rate Master content consistently pull large YouTube audiences; the r/antiwork post "Car Mechanics Are Quitting EVERYWHERE — Here's Why" (flat rate, terrible entry pay, toxic culture, no safety) spread well beyond the trade. [^9^][^10^]
 - TikTok creators explain that techs don't just quit over *how much* — they quit over *the method* of pay. [^11^]
 
-**Marketing implication:** Wheels must let shops disclose pay structure (flat rate / hourly / hybrid / salary + bonus), not just the number. A "Pay Structure" badge is a differentiator no general job board surfaces.
+**Marketing implication:** Atlas must let shops disclose pay structure (flat rate / hourly / hybrid / salary + bonus), not just the number. A "Pay Structure" badge is a differentiator no general job board surfaces.
 
 ### 1.3 Tool debt is a silent crisis — and your calculator is bait
 
@@ -44,7 +44,7 @@ Across r/HVAC, r/mechanics, r/aviationmaintenance and r/Justrolledintotheshop, t
 - Word of mouth and Facebook groups are the default hiring channels ("the best techs aren't browsing job boards — they're already employed"). Indeed/Craigslist posts are described by recruiters themselves as having "dismal success rates." [^23^]
 - Dealer vs. independent shop debates run constantly on r/mechanic — techs desperately want insider info on specific shops before jumping. [^34^]
 
-**Marketing implication:** Wheels is not competing with Indeed. It's competing with the group chat. Position it as "the group chat, organized."
+**Marketing implication:** Atlas is not competing with Indeed. It's competing with the group chat. Position it as "the group chat, organized."
 
 ### 1.6 The shop-owner side (your paying customers)
 
@@ -69,7 +69,7 @@ Across r/HVAC, r/mechanics, r/aviationmaintenance and r/Justrolledintotheshop, t
 | All trades, one app (auto/diesel/A&P/marine/moto/industrial/HVAC) | 44% of diesel techs are eyeing *other trades* — cross-trade mobility is real [^1^] |
 | Culture/management/mentorship scores | ATRI's statistically significant quit-drivers (§1.4) |
 
-**Tone of voice:** shop-floor authentic. Profanity-adjacent but professional. No corporate HR-speak. Orange-on-black, grease-under-the-fingernails aesthetic — the brand should feel like it was built in a bay, not a WeWork. Lean into the name: "It Has Wheels For A Reason" is inherently meme-friendly (works for cars, trucks, planes, boats, bikes, carts, HVAC units on casters…).
+**Tone of voice:** shop-floor authentic. Profanity-adjacent but professional. No corporate HR-speak. Orange-on-black, grease-under-the-fingernails aesthetic — the brand should feel like it was built in a bay, not a WeWork. Lean into the name: "It Has Atlas For A Reason" is inherently meme-friendly (works for cars, trucks, planes, boats, bikes, carts, HVAC units on casters…).
 
 **Hard rule:** never let shops pay to hide or remove reviews. The moment that happens, the brand is dead and Reddit will execute it publicly. Monetization = visibility and tools, never reputation laundering. Say this publicly and often — it's a trust asset.
 
@@ -90,8 +90,8 @@ You cannot launch a review platform empty. Cold-start is the existential risk; s
 ### Phase 1 — Launch (weeks 4–10): own one community
 
 1. **Reddit strategy (organic, rule-compliant):** Most trade subs (r/HVAC explicitly, r/mechanics generally) ban self-promotion and job ads. Do NOT spam. Instead:
-   - Answer pay-transparency questions with data: when someone posts "what should I ask for in Phoenix diesel?", reply with a screenshot of aggregated Wheels pay data for that metro. Value-first, link-second.
-   - Recruit trade-specific "Wheels ambassadors" — real techs with karma history who post genuinely. Compensate with swag + premium, never astroturf (Reddit detects and destroys it).
+   - Answer pay-transparency questions with data: when someone posts "what should I ask for in Phoenix diesel?", reply with a screenshot of aggregated Atlas pay data for that metro. Value-first, link-second.
+   - Recruit trade-specific "Atlas ambassadors" — real techs with karma history who post genuinely. Compensate with swag + premium, never astroturf (Reddit detects and destroys it).
    - Post the *Tool Investment Calculator* as a standalone free tool — calculators pass mod review where "download my app" posts don't.
 2. **TikTok / YouTube Shorts / Reels — the primary growth channel.** Mechanic content is a proven viral genre (tool-debt confessions, flat-rate rants, "just rolled into the shop" horrors). [^9^][^17^] Content formats:
    - **"Shop Confessions"** — anonymized real reviews read over shop-floor b-roll.
@@ -100,7 +100,7 @@ You cannot launch a review platform empty. Cold-start is the existential risk; s
    - Partner with mid-tier trade creators (Flat Rate Master tier and below — mechanics with 50k–500k followers). Their audiences are 90%+ working techs. Sponsorship rates are far below consumer-influencer rates. [^38^]
 3. **Facebook groups:** diesel tech groups, A&P mechanic groups, marine tech groups are huge, active, and lightly moderated. Ambassadors share calculator + pay data screenshots. Also where the *shop owners* live — dual-sided channel.
 4. **Trade schools:** UTI, WyoTech, Lincoln Tech, community college A&P/diesel/HVAC programs. Students are pre-employment, pre-tool-debt, and app-native. Free pizza + "know your worth" talk + calculator demo. Cheap, fast installs.
-5. **Tool trucks:** Snap-on / Mac / Matco dealers visit every shop weekly. A sticker or card on the truck ("Know what the shop across town pays — Wheels") reaches 100% of working techs in a metro. Explore revenue-share or flat-fee deals with individual dealers (they're franchisees — you can do this locally without corporate).
+5. **Tool trucks:** Snap-on / Mac / Matco dealers visit every shop weekly. A sticker or card on the truck ("Know what the shop across town pays — Atlas") reaches 100% of working techs in a metro. Explore revenue-share or flat-fee deals with individual dealers (they're franchisees — you can do this locally without corporate).
 
 ### Phase 2 — Monetization switch-on (weeks 8–14, overlapping Phase 1)
 
@@ -118,12 +118,12 @@ Pricing rationale: benchmark against the $20k–25k/mo cost of one empty bay —
 **ASAP-profit sequencing (do these in order):**
 1. **Week 8:** Grandfather the 3–5 design partners, then flip on paid tiers for everyone else in the beachhead metro. First revenue target: 5 Pro shops ≈ $1,000–1,500 MRR. Modest, but it proves willingness-to-pay and funds Phase 3.
 2. **Week 10:** Add **pay-per-application** boost ($25–50 per boosted post) as an à-la-carte option — lowers the commitment barrier for skeptical owners.
-3. **Week 12:** Launch **"Wheels Certified Shop"** — shops that (a) post real pay ranges, (b) maintain ≥3.5★ with 5+ reviews, (c) respond to reviews, get the badge + a physical bay sticker. The sticker turns every certified shop into a billboard, and turns certification into something shops *ask to pay for*. This is your Yelp-window-sticker flywheel.
+3. **Week 12:** Launch **"Atlas Certified Shop"** — shops that (a) post real pay ranges, (b) maintain ≥3.5★ with 5+ reviews, (c) respond to reviews, get the badge + a physical bay sticker. The sticker turns every certified shop into a billboard, and turns certification into something shops *ask to pay for*. This is your Yelp-window-sticker flywheel.
 4. **Week 14:** First expansion metro + second trade (recommend aviation/A&P — extreme pay-transparency pain [^5^], high wages, tight community). Reuse the playbook with 2-week compression.
 
 ### Phase 3 — Scale & defensibility (months 4–12)
 
-1. **Pay-data flywheel:** every review and job post enriches the pay dataset. At ~1,000 data points/metro, publish a free quarterly **"Wheels Wrench Report"** (state of technician pay by trade/metro). PR bait — trade press (Fleet Maintenance, CDLLife, AOPA/AVweb-adjacent outlets, Motor Magazine) needs exactly this content. [^1^][^3^]
+1. **Pay-data flywheel:** every review and job post enriches the pay dataset. At ~1,000 data points/metro, publish a free quarterly **"Atlas Wrench Report"** (state of technician pay by trade/metro). PR bait — trade press (Fleet Maintenance, CDLLife, AOPA/AVweb-adjacent outlets, Motor Magazine) needs exactly this content. [^1^][^3^]
 2. **SEO moat:** programmatic pages — "{Shop name} reviews & pay", "{trade} mechanic salary in {city}", "{trade} jobs with posted pay". HVAC techs already Google exactly this. [^18^]
 3. **B2B expansion:** fleet maintenance operators and dealership groups hire dozens of techs — enterprise contracts ($2k–10k/mo) once the mechanic-side audience is dense. Sell the data: anonymized pay benchmarking reports to shop-coaching firms and parts distributors.
 4. **Adjacent revenue (later):** affiliate deals with tool brands/retailers (the calculator naturally recommends tool budgeting), trade-school lead-gen, insurance/benefits brokers targeting shops.
