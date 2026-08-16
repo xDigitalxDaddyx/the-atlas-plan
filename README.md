@@ -10,9 +10,7 @@ assets in one place.
 ## What's in this repo
 
 ```
-├── calculator.html          # "Run The Numbers" pay calculator (hosted: /calculator.html)
-├── calculator-v2.html       # Calculator, blueprint style (hosted: /calculator-v2.html)
-├── calculator-v3.html       # Calculator, diagnostic printout style (hosted: /calculator-v3.html)
+├── RunTheNumbers.html       # "Run The Numbers" pay calculator (hosted: /RunTheNumbers.html)
 ├── index.html               # Landing page (hosted: /)
 ├── strategic-brief.html     # Rendered strategic innovation brief (hosted: /strategic-brief.html)
 ├── docs/                    # Planning + marketing docs
@@ -35,7 +33,7 @@ assets in one place.
 The repo is published at **https://xdigitalxdaddyx.github.io/shopworth/**.
 Any push to `main` automatically rebuilds the site.
 
-- Calculator: `https://xdigitalxdaddyx.github.io/shopworth/calculator.html`
+- Calculator: `https://xdigitalxdaddyx.github.io/shopworth/RunTheNumbers.html`
 - Landing page: `https://xdigitalxdaddyx.github.io/shopworth/`
 
 All three calculators have Open Graph tags pointing at a hosted preview image, so
