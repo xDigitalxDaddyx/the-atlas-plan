@@ -6,13 +6,13 @@ Each length for a different situation. Use as-is or edit the voice to yours.
 --------------------------------------------------------------------------------
 THE ONE-LINER (bio lines, signatures, quick replies)
 --------------------------------------------------------------------------------
-"Building Atlas — real pay ranges and honest shop reviews for mechanics,
+"Building ShopWorth — real pay ranges and honest shop reviews for mechanics,
 by a mechanic. Free forever. sawkasolutions.help"
 
 --------------------------------------------------------------------------------
 THE 50-WORD (group comments, Ko-fi page, DMs)
 --------------------------------------------------------------------------------
-"I'm building Atlas — a job board and shop review platform for mechanics,
+"I'm building ShopWorth — a job board and shop review platform for mechanics,
 all trades. Real pay ranges posted up front, honest reviews from techs who
 actually worked there, and a free calculator that shows what a job really
 pays after tool costs and slow weeks. Free for mechanics, always. Shops
@@ -23,7 +23,7 @@ THE 150-WORD (moderator outreach, design-partner shops, anyone asking
 seriously)
 --------------------------------------------------------------------------------
 "Long-time member here, and I'm building something I want to run by you
-properly. It's called Atlas — a transparent job board and shop review
+properly. It's called ShopWorth — a transparent job board and shop review
 platform for mechanics across all trades. The short version: techs can see
 real pay ranges and pay structure (flat rate vs hourly stated up front),
 read and leave reviews scored on the stuff that actually makes people quit
@@ -42,7 +42,7 @@ does."
 THE SHOP-OWNER VERSION (for design partners and early shop conversations —
 professional register, same honesty)
 --------------------------------------------------------------------------------
-"Atlas is a hiring and reputation platform built exclusively for the
+"ShopWorth is a hiring and reputation platform built exclusively for the
 mechanical trades. Mechanics come for transparent pay data and verified shop
 reviews; shops get in front of technicians who are actively comparing their
 options — with real numbers, not recycled job-board copy.

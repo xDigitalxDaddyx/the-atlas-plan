@@ -1,13 +1,11 @@
-# The Atlas Plan
+# ShopWorth
 
 Transparent job platform + shop reviews for mechanics of every trade. This is the
 master repo for the entire project — planning docs, product code, tools, and brand
 assets in one place.
 
-> **Working codename: "Atlas".** The final product name hasn't been decided yet.
-> Everything carries the placeholder name `Atlas` so nothing ships with an outdated
-> brand. When you pick the real name, the rename is a repo-wide find-replace (see
-> below).
+> **Brand name: ShopWorth** — "It Has ShopWorth For A Reason." The product name is
+> final; `ShopWorth` is used consistently across the codebase, docs, and hosted URLs.
 
 ## What's in this repo
 
@@ -18,7 +16,7 @@ assets in one place.
 ├── index.html               # Landing page (hosted: /)
 ├── strategic-brief.html     # Rendered strategic innovation brief (hosted: /strategic-brief.html)
 ├── docs/                    # Planning + marketing docs
-│   ├── THE ATLAS.txt        #   Master consolidated plan (v1.0)
+│   ├── THE SHOPWORTH.txt    #   Master consolidated plan (v1.0)
 │   ├── marketing-plan.md    #   Go-to-market & profit plan
 │   ├── TEST-SCENARIOS.md    #   Verified calculator test scenarios
 │   ├── calculator_prompt.txt
@@ -34,11 +32,11 @@ assets in one place.
 
 ## Hosting (GitHub Pages)
 
-The repo is published at **https://xdigitalxdaddyx.github.io/the-atlas-plan/**.
+The repo is published at **https://xdigitalxdaddyx.github.io/shopworth/**.
 Any push to `main` automatically rebuilds the site.
 
-- Calculator: `https://xdigitalxdaddyx.github.io/the-atlas-plan/calculator.html`
-- Landing page: `https://xdigitalxdaddyx.github.io/the-atlas-plan/`
+- Calculator: `https://xdigitalxdaddyx.github.io/shopworth/calculator.html`
+- Landing page: `https://xdigitalxdaddyx.github.io/shopworth/`
 
 All three calculators have Open Graph tags pointing at a hosted preview image, so
 links shared on Facebook (and most chat apps) show a rich preview card. After any
@@ -46,16 +44,6 @@ change that affects the preview, force Facebook to re-scrape:
 
 1. Open the [Sharing Debugger](https://developers.facebook.com/tools/debug/)
 2. Paste the calculator URL and click **Debug** → **Scrape Again**
-
-## When you pick the final name
-
-1. Decide the name, e.g. `Torque`.
-2. Replace `Atlas` / `atlas` repo-wide (case-sensitive passes, then one
-   case-insensitive pass for stragglers).
-3. Rename the repository on GitHub (Settings → General → Repository name).
-4. Update the OG URLs in the three calculator files and `index.html` (the
-   `github.io/the-atlas-plan/...` links).
-5. Re-scrape in the Facebook Sharing Debugger.
 
 ## Quick start (product code)
 

@@ -1,13 +1,13 @@
 ================================================================================
                               T H E   A T L A S
-                 Atlas — MASTER CONSOLIDATED PLAN (v1.0)
-        Company: It Has Atlas For A Reason — App: Atlas
+                 ShopWorth — MASTER CONSOLIDATED PLAN (v1.0)
+        Company: It Has ShopWorth For A Reason — App: ShopWorth
         Date: August 2026 — Status: SINGLE SOURCE OF TRUTH
 ================================================================================
 
 WHAT THIS DOCUMENT IS
 ---------------------
-This is the consolidated master plan for the Atlas platform, merging three
+This is the consolidated master plan for the ShopWorth platform, merging three
 prior bodies of work into ONE coherent strategy and ONE build order:
 
   SOURCE A — INNOVATION BRAINSTORM (WHEELS_STRATEGIC_BRIEF, 10 sections):
@@ -41,7 +41,7 @@ Sections 7-10 = the rules of the game. Enforce them.
 ================================================================================
 SECTION 1 — THE PRODUCT IN ONE PARAGRAPH
 ================================================================================
-Atlas is a transparent job platform and shop review app for ALL mechanic
+ShopWorth is a transparent job platform and shop review app for ALL mechanic
 trades (automotive, diesel/heavy, aircraft/A&P, marine, motorcycle, bicycle,
 industrial, HVAC, small engine, railroad, ag equipment, elevator). Mechanics
 get real pay data, verified shop reviews, culture scores, and a True Pay
@@ -52,7 +52,7 @@ starting with the founder's own multi-year home community: the Facebook
 group DIESEL KNUCKLEBUSTERS.
 
 Tagline: "Know what you're walking into before you walk out."
-Secondary: "It's got Atlas for a reason."
+Secondary: "It's got ShopWorth for a reason."
 
 THE REAL PRODUCT (from the brainstorm, still true):
 You are not building a job board. You are building LEVERAGE for mechanics.
@@ -228,14 +228,14 @@ to the build agent). Summary of what it must be:
     in the busy months.").
   - SHARE BUTTON rendering a screenshot-friendly summary card sized for
     a Facebook post. THIS IS THE GROWTH LOOP. The share card carries
-    Atlas branding (#ff6b00 on dark) — every screenshot posted anywhere
+    ShopWorth branding (#ff6b00 on dark) — every screenshot posted anywhere
     is an ad.
   - Validation test vector (must pass): flat rate $32/hr, flags 40 normal,
     20 slow weeks at 25 hrs, 50 physical hrs/wk, $1,350/mo tool payment,
     no benefits, 30-mi commute — outputs must be sane and consistent.
 
 BRIDGE TO THE APP (new, not in original spec — add after core works):
-  - Footer line on the share card: "Atlas — know what you're walking into"
+  - Footer line on the share card: "ShopWorth — know what you're walking into"
   - Optional (no-pressure) waitlist capture: one field, phone or email,
     copy: "We're building the review board the trade actually needs.
     Get in early." Never gate the calculator behind it. Gating kills sharing.
@@ -350,7 +350,7 @@ contact with the launch plan):
     pay-stub OCR pipeline, pay percentile display, pay structure badges,
     core app (jobs/reviews/profiles per Source C spec).
   BUILD NEXT (Phase 2): Culture Score radar, voice-first reviews (Whisper),
-    shop dashboard + Stripe billing, Atlas Certified Shop + bay sticker,
+    shop dashboard + Stripe billing, ShopWorth Certified Shop + bay sticker,
     review velocity detection, 48-hour review escrow.
   BUILD LATER (Phase 3): The Bench, Tool Inventory OS, SOS Network,
     predictive turnover, union API pilot.
@@ -511,7 +511,7 @@ WEEK 4-10:  App MVP done (WS-4). Founding 50 reviewers seeded. Content
             Source B Phase 1. WS-5 building.
 WEEK 8-14:  WS-5 live. Design partners grandfathered. Paid tiers flip ON
             in beachhead. First revenue target: 5 Pro shops (~$1-1.5K MRR).
-            Week 10: pay-per-application boost. Week 12: Atlas Certified
+            Week 10: pay-per-application boost. Week 12: ShopWorth Certified
             Shop badge + physical bay sticker (the Yelp-sticker flywheel).
 WEEK 14+:   Second metro/trade per data. Phase 2 workstreams (WS-6 full,
             Culture Score, voice reviews) per Source A roadmap months 4-6.
@@ -595,7 +595,7 @@ The mechanic trade is one of the last industries where workers have no
 leverage. They don't know what they're worth, what other shops pay, or
 which shops are toxic until it's too late.
 
-Atlas changes that — not by being a better job board, but by treating
+ShopWorth changes that — not by being a better job board, but by treating
 mechanics like professionals with choices. If a mechanic gets a $5/hr
 raise because of your pay data, he tells every mechanic he knows. Word of
 mouth in the trades is everything. One success story is worth 1,000 ads.
@@ -613,7 +613,7 @@ Everything else is just code.
 ================================================================================
 APPENDIX — SOURCE DOCUMENT INVENTORY
 ================================================================================
-Source A (Innovation Brainstorm): Atlas-strategic-brief/01-10
+Source A (Innovation Brainstorm): ShopWorth-strategic-brief/01-10
   (diagnosis, features, tech, business model, trust & safety, off-the-wall,
    priority matrix, roadmap, final thoughts, readme)
 Source B (Promotion): Wheels_Marketing_and_Profit_Plan.md
@@ -623,8 +623,8 @@ Source C (Build): 00-PROJECT-BRIEF, 01-ARCHITECTURE, 02-DATABASE-SCHEMA,
   03-BACKEND-API-SPEC, 04-FRONTEND-SPEC, 05-ENV-SECRETS, 06-BRANDING-VOICE,
   07-STEP-BY-STEP-PROMPTS, 08-MONETIZATION, 09-SETUP-README,
   calculator_prompt.txt
-Existing artifacts: working app scaffold (Atlas/ backend+mobile), brand
-asset library (Atlas-brand-assets/), deployed calculator/landing HTML.
+Existing artifacts: working app scaffold (ShopWorth/ backend+mobile), brand
+asset library (ShopWorth-brand-assets/), deployed calculator/landing HTML.
 
 Where this document and a source conflict, THIS DOCUMENT WINS.
 ================================================================================

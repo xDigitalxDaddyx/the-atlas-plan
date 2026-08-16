@@ -1,5 +1,5 @@
 ================================================================================
-Atlas STRATEGIC BRIEF — 08: EXECUTION ROADMAP
+ShopWorth STRATEGIC BRIEF — 08: EXECUTION ROADMAP
 Phased execution. Build the engine before the body kit.
 ================================================================================
 
@@ -47,7 +47,7 @@ Week 11-12: Polish & Launch
 
 PHASE 2: INTELLIGENCE & NETWORK (Months 4-6)
 ---------------------------------------------
-Goal: Make Atlas indispensable through intelligence and community.
+Goal: Make ShopWorth indispensable through intelligence and community.
 
 Month 4:
   - Culture Score Algorithm (NLP, radar charts, weighting)
@@ -91,16 +91,16 @@ Goal: Scale horizontally and vertically.
 Month 10:
   - Spatial computing shop tours (Apple Vision Pro / Meta Quest 3)
   - Cross-border expansion (Canada, Mexico — similar trade structures)
-  - Atlas Academy pilot (online certification prep)
+  - ShopWorth Academy pilot (online certification prep)
 
 Month 11:
   - Shop Acquisition arm (separate LLC, data-driven deal flow)
   - IRL Tool Swap Meets (3 cities, $5 entry, community building)
-  - Atlas Radio / Podcast Network (trade content, sponsorships)
+  - ShopWorth Radio / Podcast Network (trade content, sponsorships)
 
 Month 12:
   - Mechanic Dating (partner with Bumble/Tinder infrastructure)
-  - Atlas Credit Card (co-branded, tool purchase rewards)
+  - ShopWorth Credit Card (co-branded, tool purchase rewards)
   - Series A preparation (if bootstrapped) or profitability review
 
 CRITICAL PATH DEPENDENCIES

@@ -1,6 +1,6 @@
 ================================================================================
-Atlas STRATEGIC BRIEF — 02: FEATURE INNOVATIONS
-The unfair advantages that make Atlas uncopyable.
+ShopWorth STRATEGIC BRIEF — 02: FEATURE INNOVATIONS
+The unfair advantages that make ShopWorth uncopyable.
 ================================================================================
 
 P0 — BUILD THESE FIRST (High impact, do or die)
@@ -27,7 +27,7 @@ P0 — BUILD THESE FIRST (High impact, do or die)
    earn priority access to job postings.
    
    Why this wins: No competitor has community stickiness. Job boards are 
-   transactional. This makes Atlas a daily utility, not a monthly visit.
+   transactional. This makes ShopWorth a daily utility, not a monthly visit.
 
 3. SHOP DNA PROFILES
    Every shop gets a generated "DNA" profile based on 50+ data points:

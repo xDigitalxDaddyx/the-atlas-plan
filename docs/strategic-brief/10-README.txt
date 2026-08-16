@@ -1,15 +1,15 @@
 ================================================================================
-Atlas STRATEGIC BRIEF — README
+ShopWorth STRATEGIC BRIEF — README
 How to use this document set.
 ================================================================================
 
 WHAT THIS IS
 -------------
-A comprehensive strategic innovation brief for "Atlas" — a transparent 
+A comprehensive strategic innovation brief for "ShopWorth" — a transparent 
 job board and shop review platform for mechanics across all trades 
 (automotive, diesel, aircraft, marine, motorcycle, industrial, HVAC).
 
-Company: "It Has Atlas For A Reason"
+Company: "It Has ShopWorth For A Reason"
 Date: August 2026
 Author: Innovation Catalyst / Silent Weapon
 
@@ -57,7 +57,7 @@ KEY TAKEAWAYS (TL;DR)
 - Tri-state reviews (Anonymous / Verified-Employee / Verified-Customer) 
   fix the trust paradox.
 - The Bench (passive job market) disrupts how mechanics find work.
-- SOS Network (tool lending) makes Atlas a daily utility, not a 
+- SOS Network (tool lending) makes ShopWorth a daily utility, not a 
   monthly visit.
 - If you prioritize shop revenue over mechanic trust, you will die.
 

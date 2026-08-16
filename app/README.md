@@ -1,8 +1,8 @@
-# Atlas
+# ShopWorth
 
 **Know what you're walking into before you walk out.**
 
-Atlas is a transparent job platform and shop review app for **all mechanics** — automotive, motorcycle, aircraft (A&P), diesel/heavy equipment, marine, bicycle, industrial, HVAC, small engine, railroad, ag equipment, elevator. If it has moving parts and someone fixes it, Atlas covers it.
+ShopWorth is a transparent job platform and shop review app for **all mechanics** — automotive, motorcycle, aircraft (A&P), diesel/heavy equipment, marine, bicycle, industrial, HVAC, small engine, railroad, ag equipment, elevator. If it has moving parts and someone fixes it, ShopWorth covers it.
 
 *Working codename — final name TBD.*
 

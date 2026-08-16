@@ -1,7 +1,7 @@
 {
-  "name": "atlas-backend",
+  "name": "shopworth-backend",
   "version": "1.0.0",
-  "description": "Atlas API — transparent job platform & shop reviews for mechanics of every trade.",
+  "description": "ShopWorth API — transparent job platform & shop reviews for mechanics of every trade.",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/server.js",

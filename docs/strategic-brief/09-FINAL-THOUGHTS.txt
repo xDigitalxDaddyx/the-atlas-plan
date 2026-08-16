@@ -1,5 +1,5 @@
 ================================================================================
-Atlas STRATEGIC BRIEF — 09: FINAL THOUGHTS
+ShopWorth STRATEGIC BRIEF — 09: FINAL THOUGHTS
 The stuff that doesn't fit in a category but matters more than anything.
 ================================================================================
 
@@ -13,7 +13,7 @@ shops. Data is leverage. Transparency is leverage. Community is leverage.
 The app is just the interface. The real product is the shift in power 
 dynamics.
 
-If you execute this right, shops won't just USE Atlas — they'll FEAR 
+If you execute this right, shops won't just USE ShopWorth — they'll FEAR 
 not using it. And that's how you win.
 
 THE COMPETITIVE LANDSCAPE
@@ -82,8 +82,8 @@ Year 3: Build empire. Shop acquisitions. Cross-border expansion.
         Credit card. Academy.
 
 Year 5: You are the Bloomberg Terminal of the trades. Every shop owner 
-        checks Atlas before making a hiring decision. Every mechanic 
-        checks Atlas before accepting an offer. Every union uses your 
+        checks ShopWorth before making a hiring decision. Every mechanic 
+        checks ShopWorth before accepting an offer. Every union uses your 
         data in contract negotiations.
 
 That is the vision. Everything else is just code.
@@ -114,7 +114,7 @@ workers have no leverage. They don't know what they're worth. They
 don't know what other shops pay. They don't know which shops are 
 toxic until it's too late.
 
-Atlas can change that. Not by being a better job board. By being 
+ShopWorth can change that. Not by being a better job board. By being 
 the first platform that treats mechanics like professionals with 
 choices, not commodities to be bought and sold.
 

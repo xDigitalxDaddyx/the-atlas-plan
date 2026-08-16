@@ -1,4 +1,4 @@
-# Atlas API — v1
+# ShopWorth API — v1
 
 Base URL: `/api/v1`
 

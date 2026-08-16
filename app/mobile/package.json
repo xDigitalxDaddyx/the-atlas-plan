@@ -1,7 +1,7 @@
 {
-  "name": "atlas-mobile",
+  "name": "shopworth-mobile",
   "version": "1.0.0",
-  "description": "Atlas mobile app — know before you go.",
+  "description": "ShopWorth mobile app — know before you go.",
   "main": "index.js",
   "scripts": {
     "start": "expo start",
