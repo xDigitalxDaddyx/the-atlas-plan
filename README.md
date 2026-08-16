@@ -30,11 +30,11 @@ assets in one place.
 
 ## Hosting (GitHub Pages)
 
-The repo is published at **https://xdigitalxdaddyx.github.io/shopworth/**.
+The repo is published at **https://xdigitalxdaddyx.github.io/**.
 Any push to `main` automatically rebuilds the site.
 
-- Calculator: `https://xdigitalxdaddyx.github.io/shopworth/RunTheNumbers.html`
-- Landing page: `https://xdigitalxdaddyx.github.io/shopworth/`
+- Calculator: `https://xdigitalxdaddyx.github.io/RunTheNumbers.html`
+- Landing page: `https://xdigitalxdaddyx.github.io/`
 
 All three calculators have Open Graph tags pointing at a hosted preview image, so
 links shared on Facebook (and most chat apps) show a rich preview card. After any
